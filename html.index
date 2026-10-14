@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>CYBER EMOJI CORE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;-webkit-tap-highlight-color:transparent}
+:root{--cy:#00e5ff;--pk:#ff3cf7}
+body{background:#050816 radial-gradient(circle at top,#0b2748,#050816 55%);color:#fff;overflow-x:hidden;min-height:100vh}
+header{position:sticky;top:0;z-index:100;padding:10px;background:rgba(3,6,15,.94);border-bottom:1px solid rgba(255,255,255,.08)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.stat{background:#0b1322;border:1px solid rgba(0,229,255,.2);border-radius:12px;padding:6px 8px;font-size:11px}
+.stat b{display:block;margin-top:3px;font-size:13px;word-break:break-all}
+#money{font-size:20px;color:#ffd700;text-shadow:0 0 8px #fa0}
+.tabs{display:flex;gap:6px;margin-top:8px;overflow-x:auto;padding-bottom:4px}
+.tabBtn{flex:none;padding:9px 12px;border:0;border-radius:12px;background:#101c33;color:#fff;font-weight:700;font-size:13px;cursor:pointer}
+.tabBtn.on{background:linear-gradient(135deg,var(--cy),#1f7fff);color:#00131b}
+main{padding:10px 10px 120px}
+.panel{display:none}.panel.on{display:block}
+.sec{background:#0d1628;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:12px;margin-bottom:12px}
+.ttl{font-size:17px;font-weight:900;color:var(--cy);margin-bottom:8px}
+.sm{font-size:11px;opacity:.8;line-height:1.6}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+button{min-height:40px;border:0;border-radius:12px;color:#fff;font-weight:900;font-size:13px;cursor:pointer;background:linear-gradient(135deg,#00e5ff,#0077ff);padding:8px;line-height:1.3}
+button:active{transform:scale(.97)}
+button.pk{background:linear-gradient(135deg,#ff3cf7,#ff0055)}button.dk{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid rgba(255,255,255,.15)}
+button.gd{background:linear-gradient(135deg,#ffd700,#ff8800);color:#111}button.rd{background:linear-gradient(135deg,#ff355b,#ff8844)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.card{background:#0f1930;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px}
+.card .e{font-size:32px}.card .n{font-size:12px;font-weight:800;margin-top:5px}.card .r{font-size:11px;opacity:.75;margin-top:3px}
+.card .s{font-size:11px;color:#6effd5;margin-top:3px;overflow-wrap:anywhere}
+.card button{width:100%;margin-top:6px;min-height:32px;font-size:12px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#0d172a;padding:9px;border-radius:12px;font-size:12px;margin-bottom:6px;border:1px solid rgba(255,255,255,.06)}
+.lock{opacity:.4}.got{border-color:rgba(0,255,153,.45);box-shadow:0 0 10px rgba(0,255,153,.25)}
+.list{max-height:480px;overflow:auto}
+.hp{height:16px;background:#222;border-radius:99px;overflow:hidden;margin-top:8px}.hp i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff3d3d,#fc0)}
+.box{text-align:center;padding:14px;border-radius:16px;background:#190b12}
+.pop{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;padding:12px}.pop.on{display:flex}
+.pbox{width:100%;max-width:540px;max-height:88vh;overflow:auto;background:#08111f;border:1px solid rgba(0,229,255,.3);border-radius:18px;padding:14px}
+textarea{width:100%;height:90px;background:#000d1a;color:#fff;border:1px solid rgba(0,229,255,.4);border-radius:8px;padding:8px;font:12px monospace;margin-top:6px}
+.err{color:#ff6b6b;font-size:12px;font-weight:900;margin-top:6px;min-height:16px}
+#ad{margin-bottom:10px;border:1px solid rgba(0,229,255,.25);border-radius:12px;padding:9px 12px;font-size:12px;font-weight:700;background:#0a1a2e;color:#9ff;min-height:38px}
+#dock{position:fixed;right:10px;bottom:10px;z-index:400}
+.flash{position:fixed;inset:0;pointer-events:none;z-index:490;animation:fl 1.2s forwards}
+.fall{position:fixed;top:-40px;pointer-events:none;z-index:491;animation:fa linear forwards}
+@keyframes fl{0%{opacity:0}40%{opacity:.9}100%{opacity:0}}
+@keyframes fa{to{transform:translate(var(--d),115vh) rotate(360deg);opacity:0}}
+.low .flash,.low .fall{display:none}
+.card.bm1{box-shadow:0 0 6px #a00}.card.bm2{border-color:#c00;box-shadow:0 0 10px #c00;background:#241018}.card.bm3{border-color:#f22;box-shadow:0 0 14px #f22;background:#3a0c14}.card.bm4{border-color:#f00;box-shadow:0 0 20px #f00,inset 0 0 14px #a00;background:#4a0508}
+.card.bm1 .e{filter:sepia(.3) saturate(1.5) hue-rotate(-30deg)}.card.bm2 .e{filter:sepia(.6) saturate(2.5) hue-rotate(-40deg)}.card.bm3 .e,.card.bm4 .e{filter:sepia(1) saturate(5) hue-rotate(-50deg) drop-shadow(0 0 6px red)}
+.low *{animation:none!important;transition:none!important}
+</style></head><body>
+<header>
+<div class="stats">
+<div class="stat">💰 MONEY<b id="money">¥0</b></div><div class="stat">❤️ LP<b id="lp">0</b></div><div class="stat">💎 CRYSTAL<b id="crystal">0</b></div>
+<div class="stat">🏢 BASE<b id="cap">0/5</b></div><div class="stat">🏆 実績<b id="ac">0</b></div><div class="stat">📚 図鑑<b id="dc">0</b></div>
+<div class="stat">🪙 EMOZOO<b id="ez" style="color:#b300ff">0 EZ</b></div><div class="stat">🔩 強化素材<b id="mat">0</b></div>
+<label class="stat" style="display:flex;align-items:center;gap:6px;grid-column:span 2"><input type="checkbox" id="lowTg">アニメ停止（軽量）</label>
+</div>
+<div class="tabs" id="tabs"></div>
+</header>
+<main>
+<section class="panel on" id="p_home">
+<div class="sec"><div id="ad"></div><div class="ttl">⚡ CYBER EMOJI CORE</div><div class="sm">ネオン放置型インフレガチャゲーム（絵文字コレクション／えもこれ）</div><div class="btns" id="gachas"></div></div>
+<div class="sec"><div class="ttl">👥 所持キャラクター</div><div class="grid" id="inv"></div></div>
+<div class="sec"><div class="ttl">🏢 基地管理</div><div class="btns">
+<button onclick="A.expand()">基地拡張</button><button onclick="A.buyLP()">2億円 → 1LP</button>
+<button class="pk" onclick="A.accel()">10LP 加速</button><button class="pk" onclick="A.noEsc()">3LP 妨害阻止</button>
+<button onclick="A.lp2c()">200LP → 💎1</button><button class="gd" onclick="A.ezOpen()">キャラ3体 → 🪙1EZ＋¥10,000</button></div></div>
+</section>
+<section class="panel" id="p_dex"><div class="sec"><div class="ttl">📚 図鑑</div><div class="list" id="dexL"></div></div></section>
+<section class="panel" id="p_ach"><div class="sec"><div class="ttl">🏆 実績</div><div class="list" id="achL"></div></div></section>
+<section class="panel" id="p_boss"><div class="sec"><div class="ttl">⚔️ ボスレイド</div><div class="box"><div id="bName">ボス待機中...</div><div class="hp"><i id="bHp"></i></div><div id="bTxt" class="sm" style="margin-top:8px">06-07 / 12-13 / 18-19時に出現</div>
+<div class="btns"><button onclick="A.atk()">攻撃</button><button class="pk" onclick="A.force()">強制出現（¥10億）</button></div></div></div></section>
+<section class="panel" id="p_res"><div class="sec"><div class="ttl">🧪 研究所</div><div class="list" id="resL"></div></div></section>
+<section class="panel" id="p_log"><div class="sec"><div class="ttl">📜 ログ</div><div class="list sm" id="logL"></div></div></section>
+<section class="panel" id="p_mini"><div class="sec"><div class="ttl">⚔️ 小ボスラッシュ</div><div class="box"><div id="mName">待機中</div><div class="hp"><i id="mHp"></i></div><div id="mTxt" class="sm" style="margin-top:8px">小ボス出現待機</div>
+<div class="btns"><button onclick="A.mSpawn()">出現</button><button class="pk" onclick="A.mAtk()">攻撃</button></div></div></div></section>
+<section class="panel" id="p_moon"><div class="sec"><div class="ttl">🌕 ムーンロード</div><div id="moonT" class="sm"></div><div class="grid" id="moonL" style="margin-top:8px"></div></div></section>
+<section class="panel" id="p_dia"><div class="sec"><div class="ttl">💎 ダイヤルーム</div><div class="box"><div style="font-size:28px">💎 <span id="diaS">0</span></div><div class="sm" style="margin-top:6px">30分ごとに💎5が貯まります</div>
+<div class="btns"><button onclick="A.diaGet()">回収</button><button class="pk" onclick="A.diaBuy(4e10,1)">400億円→💎1</button><button class="gd" style="grid-column:span 2" onclick="A.diaBuy(4e13,1000)">40兆円→💎1000</button></div></div></div></section>
+<section class="panel" id="p_rank"><div class="sec"><div class="ttl">🏆 ランクシステム</div><div class="box"><div id="rV" style="font-size:28px;font-weight:900">C-</div><div style="margin-top:6px">🪓😇🎮 ゴッドゲーマー</div><div id="rTxt" class="sm" style="margin-top:8px">挑戦待機</div><div class="hp"><i id="rHp"></i></div>
+<div class="btns"><button onclick="A.rStart()">⚡挑戦（15秒）</button><button class="pk" onclick="A.rAtk()">🗡️攻撃</button></div><div class="sm" style="margin-top:8px">攻撃力＝毎秒収入×10 ／ 失敗で1時間待機 ／ 30日でランク-2</div></div></div></section>
+<section class="panel" id="p_evt"><div id="evtBox"></div></section>
+<section class="panel" id="p_blog"><div class="sec"><div class="ttl">📰 公式ブログ</div>
+<div class="row" style="display:block"><div class="sm">2026/06/03</div><b>💴📤交換機能追加！</b><div class="sm">交換機能が実装されました。問題が起きた場合は廃止の可能性があります。</div></div>
+<div class="row" style="display:block"><div class="sm">2026/06/03</div><b>👏エモズー硬貨流通！</b><div class="sm">キャラ3体→EZ1枚。EZを100枚集めると新領域ガチャが引けます。基地管理の取引ボタンから。</div></div>
+<div class="row" style="display:block"><div class="sm">2026/06/03</div><b>👏ホワイトウェザーガチャ実装！</b><div class="sm">ゲーム正式名称は「絵文字コレクション（えもこれ）」です。</div></div>
+<div class="row" style="display:block"><div class="sm">2026/06/02</div><b>🎉 公式ブログ開設！</b><div class="sm">アップデート情報をここでお知らせします。</div></div></div></section>
+</main>
+<div id="dock"><button onclick="A.saveOpen()">保存/読込</button></div>
+
+<div class="pop" id="popR"><div class="pbox"><div class="ttl">🎰 ガチャ結果</div><div class="grid" id="resG"></div><button class="rd" style="width:100%;margin-top:10px" onclick="A.close('popR')">閉じる</button></div></div>
+<div class="pop" id="popS"><div class="pbox"><div class="ttl">🔐 引き継ぎ（暗号化セーブ）</div>
+<div class="sm">引き継ぎコードはAES-256-GCM（PBKDF2-SHA256 60万回）で暗号化されます。パスワードはどこにも保存されません。忘れると復元できません。</div>
+<input id="savePass" type="password" autocomplete="off" placeholder="パスワード（8文字以上）" style="width:100%;margin-top:6px;padding:10px;border-radius:8px;border:1px solid #0ae6;background:#000d1a;color:#fff">
+<textarea id="saveCode" style="height:150px" placeholder="引き継ぎコード（CEC3X.…）"></textarea>
+<div class="btns"><button onclick="A.exp()">コード書き出し</button><button onclick="A.imp()">コード読み込み</button><button onclick="A.copy()">コピー</button><button class="rd" onclick="A.reset()">初期化</button></div>
+<div class="sm" style="margin-top:6px">⚠️ クライアント側の暗号化は改ざんの手間を増やすだけで、完全なチート防止にはなりません。</div><button class="dk" style="width:100%;margin-top:8px" onclick="A.close('popS')">閉じる</button></div></div>
+<div class="pop" id="popT"><div class="pbox"><div class="ttl">🔀 キャラクター交換（呪文）</div>
+<div class="sm">① 下の呪文を相手に渡す（このキャラは交換対象に固定）<br>② 相手の呪文を貼り付けて実行（10分以内・1回のみ有効）</div>
+<textarea id="trOut" readonly></textarea><textarea id="trIn" placeholder="相手の呪文"></textarea><div class="err" id="trErr"></div>
+<div class="btns"><button class="gd" onclick="A.trade()">交換する</button><button class="rd" onclick="A.close('popT')">キャンセル</button></div></div></div>
+<div class="pop" id="popE"><div class="pbox"><div class="ttl">🪙 エモズー交換</div><div class="sm">売却額が高い上位3体（ムーンロード産・新領域は除外）を消費し、EZ+1と¥10,000を得ます。</div><div class="grid" id="ezG" style="margin-top:8px"></div><div class="err" id="ezW"></div>
+<div class="btns"><button class="gd" onclick="A.ezDo()">実行</button><button class="rd" onclick="A.close('popE')">閉じる</button></div></div></div>
+
+<script>
+(()=>{
+'use strict';
+const KEY='CYBER_EMOJI_CORE_SAVE_V2',CAP=1e300,$=i=>document.getElementById(i);
+const num=(v,d=0)=>{v=Number(v);return Number.isFinite(v)?v:d};
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const UN=[['無量大数',1e68],['不可思議',1e64],['那由他',1e60],['阿僧祇',1e56],['恒河沙',1e52],['極',1e48],['載',1e44],['正',1e40],['澗',1e36],['溝',1e32],['穣',1e28],['𥝱',1e24],['垓',1e20],['京',1e16],['兆',1e12],['億',1e8],['万',1e4]];
+function fmt(n){n=Math.max(0,num(n));if(n<1e4)return '¥'+Math.floor(n).toLocaleString();if(n>=1e72)return '¥'+n.toExponential(2);const u=UN.find(x=>n>=x[1]);return '¥'+(n/u[1]).toFixed(2).replace(/\.?0+$/,'')+u[0]}
+const mk=(t,r)=>r.map(x=>({emoji:x[0],name:x[1],rarity:x[2],sell:x[3],type:t}));
+/* ===== データ ===== */
+const CH=mk('n',[['🗑️','ただのごみ箱','LOW',5],['📦','古びた段ボール兵器','LOW',8],['⚙️','旧式スチールギア','LOW',25],['🤖','プロトタイプ・ロボット','MID',60],['🐺','孤高のシャドウ・ウルフ','MID',260],['🛸','小型探索UFO','MID',350],['⚡','雷撃コア・Type-X','ELITE',900],['🔥','灼熱プラズマ炉','ELITE',2200],['🌊','アクア・エネルギー炉','ELITE',3000],['🌟','超新星スーパーノヴァ','SUPER',1e4],['🦊','九尾のファントム・フォックス','SUPER',26000],['🌌','銀河制御アルカディア','SUPER',4e4],['👑','皇帝のインペリアルクラウン','LEGEND',15e4],['🐉','極天竜サイバー・ドラゴン','LEGEND',35e4],['🛸','未知の生命体マザーシップ','LEGEND',5e5],['🐉🔥','煉獄竜ヘル・ドラグニクス','CHIMERA',1.5e6],['👑🌌','宇宙皇帝アストラル・ゼロ','CHIMERA',3e6],['🌋⚔️','災厄剣ラグナ・ブレイカー','CHIMERA',5e6],['🐺🌑','月蝕獣フェンリル・ゼロ','CHIMERA',1.2e7],['🧬🌑','原初融合ノクス・エデン','CHIMERA',1e8]]);
+const CHIM=CH.filter(c=>c.rarity==='CHIMERA');
+const EV=mk('ev',[['🌅','ネオ・ニューイヤー・ガイア','EVENT',2.4e5],['🍫','ショコラ・マトリクスハート','EVENT',2.6e5],['🌸','サクラ・ブレード・ナノテック','EVENT',4.5e4],['🌱','ネオ・スプリング・スプラウト','EVENT',6e4],['☔','レイニー・ドローン微雨','EVENT',7.5e4],['🎆','サマーバースト・フェスティバル','EVENT',1e5],['🌌','七夕クォンタム・オリヒメ','EVENT',2e5],['👻','ゴースト・イン・ザ・ネット','EVENT',1.75e5],['🎑','月詠サイバーラビット','EVENT',1.3e5],['🎃','ジャック・オー・サイバーランタン','EVENT',1.6e5],['🍁','紅葉メランコリアブレード','EVENT',1.9e5],['🎄','聖夜インフィニティツリー','EVENT',3.5e5]]);
+const P={
+dim:mk('dim',[['🧊','異界冷却コア・NOVA','異世界RARE',1.22e8],['⚙️','崩壊歯車メルター','異世界RARE',3.4e8],['⚡','次元雷獣ヴォルト・ハウル','異世界ELITE',5e7],['🛰️','次元兵器ネメシス・ゼロ','異世界SUPER',5.55e8],['☀️','恒星融合ヘリオス・リヴァイア','異世界LEGEND',1e10],['🌌👑','異界王クロノス・エンド','異世界GOD',1.11e11]]),
+animal:mk('animal',[['🦊','偵察狐レンジャー','BEAST RARE',3.5e8],['🐺','群狼リーダー・フェンリルJr.','BEAST ELITE',1.2e8],['🐻','山王ベア・ウォーデン','BEAST SUPER',1.42e8],['🐘','古強者エレファント・パレード','BEAST LEGEND',9.18e9],['🦁👑','百獣帝レオナイト','BEAST KING',8.1e10]]),
+fairy:mk('fairy',[['🌿','クローバー・ヒーラー','FAIRY RARE',4.44e6],['🦋','シルフ・フラッター','FAIRY ELITE',1.45e8],['🔮','オラクル・サイト','FAIRY SUPER',6.9e9],['🕊️','セラフィム・ミューズ','FAIRY LEGEND',3.1e9],['👑','フェアリークイーン・オーロラ','FAIRY QUEEN',9e9]]),
+robopet:mk('robopet',[['🔋','バッテリーネコ・V1','ROBO RARE',3e8],['🧠','ニューロコリー・β','ROBO ELITE',1.1e9],['⚡','タキオンリンク・リンクス','ROBO SUPER',4.5e9],['🔰','プロトドラゴン・R0','ROBO LEGEND',1.9e10],['💠','コアペット・ハイペリオン','ROBO CORE',8.5e12]]),
+heaven:mk('heaven',[['🪓🪽','断罪の翼兵アーク','HEAVEN RARE',2e13],['👑🪽','天空王ヴァルディア','HEAVEN ELITE',6.5e13],['🐉🪽','蒼天龍ゼルフィア','HEAVEN SUPER',3.5e14],['☄️🪽','終焉彗星セラフィム','HEAVEN LEGEND',2.5e15],['🪓👑🪽','天獄王グランドアーク','HEAVEN KING',1.2e16],['🪓💙👑🪽','天獄神アストラ・ゼロ','HEAVEN GOD',5e16]]),
+tsuyu:mk('tsuyu',[['🌧️👻','小雨のユウレイ・ドリズル','RAINY RARE',1e16],['🌩️🧙','雷雨魔導士サンダークレリック','RAINY ELITE',4e16],['🌊🏯','洪水城砦アクア・フォートレス','RAINY SUPER',3e17],['🌧️👼','梅雨天使ティアドロップ・セラフ','RAINY LEGEND',2e18],['💧☀️🌈','梅雨晴れ神アマテラス・レイン','RAINY GOD',4e19],['🌊⛈️👼🌌','超梅雨創造神ストーム・オリジン','TSUYU ORIGIN',1e20]]),
+rainbow:mk('rainbow',[['🔴🐉','紅炎龍スカーレット・ブレイズ','CHROMATIC RARE',1e16],['🌈🐉','虹彩龍レインボー・クロマ','SPECTRUM ELITE',8e16],['👑🐉📜','竜王龍ドラゴニック・ロード','DRAGON KING',3.5e17],['🏆🐉💎','覇者龍チャンピオン・ダイヤドレイク','DRAGON LEGEND',1.2e18],['🌈💀🐉🌌👑','終焉虹龍アポカリプス・クロマ','DRAGON GOD',3e19],['🌈🌈🐉👑🌌','超神虹皇ウルティマ・レインボー・ゼロ','RAINBOW GOD',9.9e19]]),
+food:mk('food',[['🍕🍔🌮','脂質帝ジャンクフード・トライアングル','FOOD RARE',1e16],['🍜🍛🍝','麺カレーパスタ三神ヌードル・カオス','FOOD ELITE',6e16],['🍕🍣🍛','世界三大料理神グルメ・トライアンフ','FOOD SUPER',4e17],['🍣🍜🍱','和食三聖ウマミ・サンクタム','FOOD LEGEND',4e18],['🍕🍕🍕','ピザ三位一体神 ウルティマ・ピッツァ・トリニタス','FOOD GOD',5e19],['🍕🍿🍔🌮🥩🍣','六食具現神アブソリュート・フードゼロ','FOOD ORIGIN',9.99e20]]),
+robow:mk('robow',[['🤖⛓️','鎖拳メカ・チェインフィスト','MECHA RARE',1.2e6],['🗡️🤖⛓️','チェインデュエリスト・Ω','MECHA ELITE',4.8e6],['🦾⛓️','拘束砕機ブレイカー・ギロチン','MECHA SUPER',1.8e7],['🕹️👑🤖','機皇指令ゼロ・ディレクター','MECHA LEGEND',9e7],['🧠🌐🤖','集積意識ゴッドネット','MECHA GOD',4.5e8],['🕹️🔥⚡','最終制御者オーバードライブ・ゼロ','MECHA ORIGIN',1.5e9]]),
+earth:mk('earth',[['🪨🌟','原岩星グラニット・スター','GEO RARE',1.5e6],['🪐🪨','環土将サテライト・テラ','GEO ELITE',5.2e6],['🌑💫','新月核ルナ・ベッドロック','GEO SUPER',1.8e7],['🌍👑','地球王ガイア・レックス','GEO LEGEND',9e7],['🌏💫👑','恒星創地神テラ・スター','GEO GOD',4.2e8],['🌟🌏👑','創星地母ガイア・オリジン','GEO ORIGIN',1.5e9]]),
+night:mk('night',[['🛏️😪','まくらキング・ドリーミー','NIGHT RARE',2e17],['🕯️👻','怪談ストリーマー','NIGHT ELITE',1.2e18],['🦉👑','ナイトオウルキング','NIGHT SUPER',6e18],['🌌👑','星夜皇ノクターナ','NIGHT LEGEND',3e19],['🌌👼','夢守天使ヒュプノス','NIGHT LEGEND',8e19]]),
+pet:mk('pet',[['💘😺','ラブリーキャット・ミニ','PET RARE',2e17],['💎🐱','クリスタルキャット','PET ELITE',1.2e18],['👑😺','ロイヤルミニキャット','PET SUPER',6e18],['💘👑','ハートクイーン・ミニ','PET LEGEND',3e19],['💎🌌','ミニ・コアクリスタ','PET CORE',8e19]]),
+zombie:mk('zombie',[['🧟','よろめきゾン','ZOMBIE RARE',2e17],['🧟‍♀️','レディ・ロッテン','ZOMBIE ELITE',1.2e18],['👑🧟','ゾンビキング','ZOMBIE SUPER',6e18],['👑💀','死王ネクロ・ロード','ZOMBIE LEGEND',3e19],['🧬👑','終変ネクロゲン','ZOMBIE LEGEND',8e19]]),
+tale:mk('tale',[['🧝🌲','森のエルフ','TALE RARE',3e17],['🎅🛷','サンタ・ストライダー','TALE ELITE',2e18],['🧌👑','巨人王グランデ','TALE SUPER',1e19],['👑🧝','森界女王ティタニア','TALE LEGEND',6e19],['📖👼','御伽の守護天','TALE LEGEND',1.5e20]]),
+white:mk('white',[['☁️🌤️','薄雲ひとひら・クリア','WHITE RARE',2.5e21],['🤍🌪️','白嵐スノーウィンド・セクター','WHITE ELITE',1.2e22],['🌤️👑','晴嵐皇クリア・テンペスト','WHITE SUPER',8e22],['🌤️🌌','天穹神クリアスカイ・ゼニス','WHITE LEGEND',6e23],['🌤️❄️👑','白天神クリアフロスト・オーバーロード','WHITE GOD',6e24],['🤍☁️🌈🌌','白天創造神ホワイトウェザー・オリジン','WHITE ORIGIN',1e26]]),
+pudding:mk('pudding',[['🍮✨','黄金プリンの守護者・カスタード','PUDDING RARE',1e27],['🍮👑','王冠プリン・ロイヤルカスタード','PUDDING ELITE',1.2e28],['🍮🌠','流星プリン・メテオカスタード','PUDDING SUPER',8e28],['🍮👼','天使プリン・セラフカスタード','PUDDING LEGEND',6e29],['🍮🔱👑','覇神プリン・トライデントカスタード','PUDDING GOD',1e31],['🍮🔱🌌👑✨','創世無双神プリン・アブソリュートカスタード・ゼロ','PUDDING ORIGIN',1e32]]),
+bird:mk('bird',[['🐟🦆','水面ハンター・フィッシュダック','BF RARE',1.2e21],['🦈🦅','猛撃サメイーグル','BF ELITE',9e21],['🐳🛡️','潮壁クジラ・バスチオン','BF SUPER',7e22],['🐟👑','海皇魚レガリア','BF LEGEND',8e23],['🌊👑🐦','潮天帝オケアノス・アヴィウス','BF GOD',4e24],['🌌🌈🐟🦆','創潮白翼神 バシレウス・マリンセレス','BF ORIGIN',1e26]]),
+frontier:mk('frontier',[['🌌🪽','創界天翼 ネオ・エターナ','FRONTIER',1e32],['💫🪽👑','領域皇 アストラル・オリジン','FRONTIER',8.9e33],['🔮🪽🌠','予言翼神 プロフェシー・ゼロ','FRONTIER',7.8e35],['🌃🧎‍♂️🌟','悲しみの歌','FRONTIER',1e100],['🌑🫙','無','FRONTIER',9e103],['🤙🪬🪬💴','画面の向こうへ','FRONTIER',5e150]])};
+const ALL=[];{const s=new Set();[...CH,...EV,...Object.values(P).flat()].forEach(c=>{if(!s.has(c.name)){s.add(c.name);ALL.push(c)}})}
+/* ガチャ定義: c=m(お金)/c(💎)/l(LP)/e(EZ) */
+const GA=[
+{t:'🧚 フェアリー',c:'c',p:60,k:'fairy',fx:['#3f6','🧚']},{t:'🐾 アニマルアーミー',c:'c',p:55,k:'animal',fx:['#a60','🐾']},{t:'🤖 ロボペット',c:'c',p:60,k:'robopet',fx:['#999','🤖']},
+{t:'🌀 異世界個体',c:'l',p:600,k:'dim',fx:['#f0f','🌀'],bonusC:1},
+{t:'☔ 超梅雨ガチャ☁️',c:'m',p:1e16,k:'tsuyu',fx:['#39f','💧']},{t:'🌈 レインボードラゴン🐉',c:'m',p:1e16,k:'rainbow',fx:['#fa0','🌈']},{t:'🍕 トリプルフード🍟',c:'m',p:1e16,k:'food',fx:['#f72','🍕']},
+{t:'🕹️ ロボット戦士⛓️',c:'c',p:4000,k:'robow',fx:['#0ff','⛓️']},{t:'🌏 アーススター💫',c:'c',p:4000,k:'earth',fx:['#3d8','🌏']},{t:'🪓🔥 天獄ガチャ👑🪽',c:'c',p:1000,k:'heaven',fx:['#0af','🪽']},
+{t:'🛏️ 夜更かしーズ😗',c:'c',p:20000,k:'night',fx:['#70f','🌙']},{t:'💘 クリスタルミニペット',c:'m',p:2e17,k:'pet',fx:['#f6f','💎']},{t:'🏆 ゾンビソウル祭🧟',c:'c',p:20000,k:'zombie',fx:['#5f0','🧟']},
+{t:'🌟 童話祭🎅🧝',c:'m',p:3e17,k:'tale',fx:['#c0f','✨']},{t:'☁️ ホワイトウェザー🤍',c:'m',p:3e18,k:'white',fx:['#fff','❄️']},{t:'🍮 プリン無双🔱',c:'m',p:1e28,k:'pudding',fx:['#fa0','🍮']},
+{t:'🐟 鳥魚アルティメット🦆',c:'m',p:1e28,k:'bird',fx:['#7af','🪽']},{t:'🌌 新領域ガチャ🪽',c:'e',p:100,k:'frontier',fx:['#b0f','🪽']}];
+const CUR={m:['money','お金'],c:['crystal','💎'],l:['lp','LP'],e:['ez','EZ']};
+const RES=[['luck','ガチャ運強化',5,'低レア率を下げる'],['legend','レジェ率UP',10,'LEGEND/SUPER率上昇'],['event','イベント率UP',15,'内部補正'],['chimera','キメラ解析',20,'内部補正'],['life','ライフ効率化',25,'LP+1（即時）'],['cap','超圧縮倉庫',30,'基地容量+5（即時）'],['auto','自動研究AI',40,'30秒ごとに結晶+1の抽選'],['time','時空観測装置',50,'内部補正']];
+const count=r=>G.owned.filter(c=>c.rarity===r).length;
+const ACH=[['m1','💰 所持金100万',()=>G.money>=1e6],['l5','👑 LEGENDを5体',()=>count('LEGEND')>=5],['c1','☣️ CHIMERA獲得',()=>count('CHIMERA')>=1],['b29','🗑️ ごみ箱29体',()=>G.owned.filter(c=>c.name==='ただのごみ箱').length>=29],['k5','⚔️ ボス5体撃破',()=>G.bossKill>=5],['ev8','📅 EVENT 8体所持',()=>count('EVENT')>=8]];
+const ADS=['🎉 新領域ガチャはEZ100個で引ける！','🪙 キャラ3体→EZ1枚＋¥10,000','💎 火・金・土・日の12〜14時はダイヤ祭！','❤️ 月・水・金の12〜14時はライフ祭！','⚔️ ボスレイドは強制出現でいつでも挑戦','🌕 ムーンロードは15分ごとに更新','📤 交換は呪文を渡し合うだけ！','🏆 ランクを上げて♾️を目指そう'];
+/* ===== 状態 ===== */
+const def=()=>({money:1e5,lp:0,crystal:0,baseCap:5,owned:[],dex:[],ach:[],pity:0,research:{luck:0,legend:0,event:0,chimera:0,life:0,cap:0,auto:0,time:0},logs:[],moon:[],moonT:0,diaStored:0,diaT:Date.now(),ez:0,buffs:{},rank:0,rankCd:0,rankDecay:Date.now(),bossKill:0,used:[]});
+let G=def();
+function norm(o){const d=def();o=(o&&typeof o==='object')?o:{};
+ const m={achievements:'ach',emozoo:'ez',diamondStored:'diaStored',moonRoad:'moon',lastDiamondGain:'diaT',lastMoonRefresh:'moonT',legendPity:'pity',lastDecay:'rankDecay'};
+ for(const k in m)if(o[m[k]]===undefined&&o[k]!==undefined)o[m[k]]=o[k];
+ const g=Object.assign(d,o);g.research=Object.assign(def().research,o.research||{});
+ ['owned','dex','ach','logs','moon','used'].forEach(k=>{if(!Array.isArray(g[k]))g[k]=[]});
+ g.owned=g.owned.filter(c=>c&&typeof c==='object').map(c=>({...c,sell:Math.min(CAP,Math.max(1,num(c.sell,1)))}));
+ if(!g.buffs||typeof g.buffs!=='object')g.buffs={};
+ ['money','lp','crystal','ez','diaStored','bossKill','rank','rankCd'].forEach(k=>g[k]=Math.min(CAP,Math.max(0,num(g[k],d[k]))));
+ g.baseCap=Math.max(5,num(g.baseCap,5));g.diaT=num(g.diaT,Date.now());g.moonT=num(g.moonT,0);g.rankDecay=num(g.rankDecay,Date.now());g.pity=num(g.pity,0);
+ g.rank=Math.min(24,Math.floor(g.rank));g.logs=g.logs.slice(-200);return g}
+/* ===== 暗号化セーブ（AES-256-GCM） ===== */
+const KEY3='CEC_SAVE_V3',KBAK='CEC_SAVE_V3.bak',KLEG='CEC_LEGACY_BACKUP',FV=3,TE=new TextEncoder(),TD=new TextDecoder(),SUB=(typeof crypto!=='undefined'&&crypto.subtle)||null,ITER=6e5;
+const b64u={enc:u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')},dec:s=>{s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';const r=atob(s),u=new Uint8Array(r.length);for(let i=0;i<r.length;i++)u[i]=r.charCodeAt(i);return u}};
+const cat=(...a)=>{const o=new Uint8Array(a.reduce((s,x)=>s+x.length,0));let p=0;a.forEach(x=>{o.set(x,p);p+=x.length});return o};
+async function gz(u,c){const s=new (c?CompressionStream:DecompressionStream)('gzip'),w=s.writable.getWriter();w.write(u);w.close();return new Uint8Array(await new Response(s.readable).arrayBuffer())}
+let DK=null;
+function devKey(){return DK||(DK=(async()=>{const db=await new Promise((res,rej)=>{const r=indexedDB.open('cec',1);r.onupgradeneeded=()=>r.result.createObjectStore('k');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+ const get=()=>new Promise((res,rej)=>{const q=db.transaction('k').objectStore('k').get('dev');q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)});
+ let k=await get();if(!k){k=await SUB.generateKey({name:'AES-GCM',length:256},false,['encrypt','decrypt']);await new Promise((res,rej)=>{const t=db.transaction('k','readwrite');t.objectStore('k').put(k,'dev');t.oncomplete=res;t.onerror=()=>rej(t.error)})}return k})().catch(e=>{DK=null;throw e}))}
+async function seal(obj,kind,key,extra){let raw=TE.encode(JSON.stringify(obj)),flag=0;if(typeof CompressionStream!=='undefined'){raw=await gz(raw,1);flag=1}
+ const iv=crypto.getRandomValues(new Uint8Array(12)),hdr=cat(new Uint8Array([FV,flag]),extra||new Uint8Array(0)),pre='CEC3'+kind+'.';
+ const ct=new Uint8Array(await SUB.encrypt({name:'AES-GCM',iv,additionalData:cat(TE.encode(pre),hdr),tagLength:128},key,raw));return pre+b64u.enc(cat(hdr,iv,ct))}
+async function unseal(code,kind,keyFn,hl){const pre='CEC3'+kind+'.';if(typeof code!=='string'||!code.startsWith(pre))throw new Error('コード形式が不正です');
+ const u=b64u.dec(code.slice(pre.length).replace(/\s+/g,''));if(u.length<2+hl+12+16)throw new Error('コードが破損しています');if(u[0]!==FV)throw new Error('未対応のバージョンです');
+ const hdr=u.slice(0,2+hl),iv=u.slice(2+hl,14+hl),ct=u.slice(14+hl),key=await keyFn(hdr);let raw;
+ try{raw=new Uint8Array(await SUB.decrypt({name:'AES-GCM',iv,additionalData:cat(TE.encode(pre),hdr),tagLength:128},key,ct))}catch(e){throw new Error('認証失敗（パスワード違い・改ざん・破損）')}
+ if(u[1]===1){if(typeof DecompressionStream==='undefined')throw new Error('この環境は圧縮に未対応');raw=await gz(raw,0)}else if(u[1]!==0)throw new Error('未対応のフラグです');return JSON.parse(TD.decode(raw))}
+async function pk(pass,salt,iter){const m=await SUB.importKey('raw',TE.encode(String(pass).normalize('NFKC')),'PBKDF2',false,['deriveKey']);return SUB.deriveKey({name:'PBKDF2',hash:'SHA-256',salt,iterations:iter},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function exportCode(obj,pass){if(!pass||String(pass).length<8)throw new Error('パスワードは8文字以上にしてください');const salt=crypto.getRandomValues(new Uint8Array(16)),it=new Uint8Array(4);new DataView(it.buffer).setUint32(0,ITER);return seal(obj,'X',await pk(pass,salt,ITER),cat(it,salt))}
+function importCode(code,pass){return unseal(String(code).trim(),'X',async h=>{const it=new DataView(h.buffer,h.byteOffset+2,4).getUint32(0);if(it<1e5||it>2e6)throw new Error('不正な反復回数');return pk(pass,h.slice(6,22),it)},20)}
+const localSeal=async o=>seal(o,'L',await devKey()),localOpen=c=>unseal(c,'L',()=>devKey(),0);
+function checkSave(o){if(!o||typeof o!=='object'||Array.isArray(o))throw new Error('データ構造が不正です');
+ for(const k of ['money','lp','crystal','baseCap','ez'])if(o[k]!==undefined&&(typeof o[k]!=='number'||!Number.isFinite(o[k])||o[k]<0||o[k]>CAP))throw new Error('数値が範囲外です：'+k);
+ if(!Array.isArray(o.owned)||o.owned.length>5000)throw new Error('所持データが不正です');
+ for(const c of o.owned)if(!c||typeof c.name!=='string'||c.name.length>100||typeof c.sell!=='number'||!(c.sell>0)||c.sell>CAP)throw new Error('キャラデータが不正です');return true}
+function playStep(e,dt,active,busy,rand,win){if(!active||busy)return null;e.playAcc=Math.min(num(e.playAcc)+Math.max(0,dt),win*2);if(e.playAcc<win)return null;e.playAcc=Math.max(0,e.playAcc-win);return rand()<.8?'start':'miss'}
+function banner(t){let d=$('banner');if(!d){d=document.createElement('div');d.id='banner';d.style.cssText='background:#a00;color:#fff;padding:8px;font-size:12px;font-weight:700;position:sticky;top:0;z-index:600';document.body.prepend(d)}d.textContent=t}
+let ready=false,saveErr=false,lastBak=0,sq=Promise.resolve();
+async function doSave(){if(!ready||!SUB)return;try{const code=await localSeal(G);try{const cur=localStorage.getItem(KEY3);if(cur&&Date.now()-lastBak>6e4){localStorage.setItem(KBAK,cur);lastBak=Date.now()}}catch(e){}localStorage.setItem(KEY3,code);saveErr=false}catch(e){saveErr=true;console.warn('save failed',e)}}
+function save(){sq=sq.then(doSave).catch(()=>{});return sq}
+async function load(){const ls=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+ if(!SUB){banner('この環境は暗号化に未対応です（HTTPSまたはlocalhostで開いてください）。進行は保存されません。');G=def();return}
+ const c=ls(KEY3),leg=ls(KEY);
+ if(c){try{G=norm(await localOpen(c));ready=true;return}catch(e){}
+  const bk=ls(KBAK);if(bk){try{G=norm(await localOpen(bk));ready=true;banner('⚠️ 最新のセーブが読めず、バックアップから復元しました');return}catch(e){}}
+  if(confirm('セーブデータを読み込めません。新規で始めますか？\n（キャンセル：保存を停止し、引き継ぎコードでの復元を待ちます）')){try{localStorage.setItem('CEC_CORRUPT_'+Date.now(),c)}catch(e){}G=def();ready=true}else{G=def();banner('保存停止中：「保存/読込」から引き継ぎコードを読み込んでください')}return}
+ if(leg){try{const o=JSON.parse(leg);checkSave(o);const g=norm(o),t=await localSeal(g);await localOpen(t);localStorage.setItem(KLEG,await localSeal({raw:leg}));localStorage.setItem(KEY3,t);
+   if(!(await localOpen(localStorage.getItem(KEY3)))||localStorage.getItem(KLEG)==null)throw new Error('検証失敗');localStorage.removeItem(KEY);G=g;ready=true;return}
+  catch(e){G=def();banner('旧セーブの移行に失敗しました（元データは保持しています）：'+e.message);return}}
+ G=def();ready=true}
+
+let st=0;const sv=()=>{clearTimeout(st);st=setTimeout(save,400)};
+/* ===== 描画 ===== */
+const D=new Set(['inv','dex','ach','res','log','moon']);let raf=0;
+function U(...k){k.forEach(x=>D.add(x));if(!raf)raf=requestAnimationFrame(()=>{raf=0;paint()});sv()}
+function card(c,extra){return `<div class="card"><div class="e">${esc(c.emoji)}</div><div class="n">${esc(c.name)}</div><div class="r">${esc(c.rarity)}</div><div class="s">${extra||fmt(c.sell)}</div></div>`}
+function paint(){
+ $('money').textContent=fmt(G.money);$('lp').textContent=G.lp+' LP';$('crystal').textContent=G.crystal.toLocaleString();
+ $('cap').textContent=G.owned.length+' / '+G.baseCap;$('ac').textContent=G.ach.length;$('dc').textContent=G.dex.length;$('ez').textContent=G.ez.toLocaleString()+' EZ';
+ $('diaS').textContent=G.diaStored;$('mat').textContent=num(G.mat).toLocaleString();$('rV').textContent=RN[G.rank]||'♾️';
+ if(D.has('inv')){let h='';for(let i=G.owned.length-1;i>=0;i--){const c=G.owned[i];h+=`<div class="card bm${c.bm|0}"><div class="e">${esc(c.emoji)}</div><div class="n">${esc(c.name)}${c.bm?' 🩸'+c.bm:''}</div><div class="r">${esc(c.rarity)}${c.desc?' ｜'+esc(c.desc):''}</div><div class="s">売却 ${fmt(c.sell)}</div><button class="rd" data-a="sell" data-i="${i}">売却</button><button data-a="trade" data-i="${i}">交換</button></div>`}$('inv').innerHTML=h}
+ if(D.has('dex')){$('dexL').innerHTML=ALL.concat(EXC).map(c=>{const g=G.dex.includes(c.name);return `<div class="row ${g?'':'lock'}"><span>${g?esc(c.emoji)+' '+esc(c.name):'❓ ？？？'}</span><span>${g?esc(c.rarity):''}</span></div>`}).join('')}
+ if(D.has('ach')){$('achL').innerHTML=ACH.map(a=>{const g=G.ach.includes(a[0]);return `<div class="row ${g?'got':'lock'}"><b>${g?'':'🔐 '}${a[1]}</b><span>${g?'済':'未'}</span></div>`}).join('')}
+ if(D.has('res')){$('resL').innerHTML=RES.map(r=>`<div class="row"><div><div>${r[1]}（Lv.${G.research[r[0]]||0}）</div><div class="sm">${r[3]}</div></div><button data-a="res" data-k="${r[0]}" ${G.crystal<r[2]?'style="opacity:.5"':''}>買う 💎${r[2]}</button></div>`).join('')}
+ if(D.has('log')){$('logL').innerHTML=G.logs.slice().reverse().map(esc).join('<br>')}
+ if(D.has('moon')){$('moonL').innerHTML=G.moon.map((c,i)=>`<div class="card"><div class="e">${esc(c.emoji)}</div><div class="n">${esc(c.name)}</div><div class="r">${esc(c.rarity)}</div><div class="s">${fmt(c.sell*10)}</div><button data-a="moon" data-i="${i}">購入</button></div>`).join('')}
+ D.clear();bossBar();
+}
+const RN=["C-","C","C+","B-","B","B+","A-","A","A+","S-","S","S+","U-","U","U+","X-","X","X+","Y-","Y","Y+","Z-","Z","Z+","♾️"];
+const RE=[4,6,8,10,12,14,16,18,20,24,28,32,36,40,44,48,52,56,60,64,100,112,449,1798,7192];
+function log(t){G.logs.push('['+new Date().toLocaleTimeString()+'] '+t);if(G.logs.length>200)G.logs.shift();U('log')}
+function fx(f){if(document.body.classList.contains('low'))return;const d=document.createElement('div');d.className='flash';d.style.background=`radial-gradient(circle,${f[0]} 0%,transparent 70%)`;document.body.appendChild(d);setTimeout(()=>d.remove(),1300);
+ for(let i=0;i<36;i++){const p=document.createElement('div');p.className='fall';p.textContent=f[1];p.style.cssText+=`left:${Math.random()*100}vw;font-size:${14+Math.random()*20}px;animation-duration:${1.5+Math.random()*2}s;--d:${Math.random()*300-150}px`;document.body.appendChild(p);setTimeout(()=>p.remove(),3800)}}
+function results(list){$('resG').innerHTML=list.map(c=>card(c)).join('');$('popR').classList.add('on')}
+/* ===== 取得/ガチャ ===== */
+const clone=o=>JSON.parse(JSON.stringify(o));
+function obtain(c){c.sell=Math.min(CAP,Math.max(1,num(c.sell,1)));G.owned.push(c);G.money=Math.min(CAP,G.money+Math.floor(c.sell/4));
+ const nw=!G.dex.includes(c.name);if(nw)G.dex.push(c.name);log('獲得 ▶ '+c.name);checkAch();U('inv',nw?'dex':'')}
+function checkAch(){ACH.forEach(a=>{if(!G.ach.includes(a[0])&&a[2]()){G.ach.push(a[0]);G.money=Math.min(CAP,G.money+5e4);log('🏆 実績解除 ▶ '+a[1]+'（¥50,000）');U('ach')}})}
+function pick(pool){const g={};pool.forEach(c=>(g[c.rarity]=g[c.rarity]||[]).push(c));const ks=Object.keys(g),W=[50,28,14,6,3,1.5].map((x,i)=>i>=2?x*(1+gachaBonus()):x);let t=0;const w=ks.map((k,i)=>{const x=W[i]||1;t+=x;return x});let r=Math.random()*t;for(let i=0;i<ks.length;i++){r-=w[i];if(r<=0){const a=g[ks[i]];return a[Math.random()*a.length|0]}}return pool[0]}
+function pay(cur,p){const k=CUR[cur][0];if(G[k]<p){alert(CUR[cur][1]+'不足');return false}G[k]-=p;return true}
+function room(n){if(G.owned.length+n>G.baseCap){alert('基地容量不足');return false}return true}
+function rarityRoll(){const r=G.research;let L=Math.max(10,40-r.luck),M=Math.max(10,30-r.luck),E=Math.min(40,18+.5*r.luck),S=Math.min(25,10+.3*r.legend),V=Math.min(10,2+.2*r.legend);
+ if(G.pity>=99){G.pity=0;return 'LEGEND'}const x=Math.random()*(L+M+E+S+V);if(x<L)return 'LOW';if(x<L+M)return 'MID';if(x<L+M+E)return 'ELITE';if(x<L+M+E+S){G.pity++;return 'SUPER'}G.pity=0;return 'LEGEND'}
+function normal(n){const half=G.buffs.normalHalf&&G.buffs.normalHalf>Date.now();const cost=(n===10?3e4:3e3)*(half?.5:1);
+ if(!room(n)||!pay('m',cost))return;const out=[];for(let i=0;i<n;i++){const a=CH.filter(c=>c.rarity===rarityRoll());const c=clone(a[Math.random()*a.length|0]);out.push(c);obtain(c)}results(out)}
+function life(n){if(!room(n)||!pay('l',n===10?200:20))return;const out=[];for(let i=0;i<n;i++){const c=clone(CHIM[Math.random()*CHIM.length|0]);out.push(c);obtain(c)}fx(['#f00','⚠️']);results(out)}
+function run(i){const g=GA[i];if(!room(1)||!pay(g.c,g.p))return;if(g.bonusC)G.crystal+=g.bonusC;const c=clone(pick(P[g.k]));obtain(c);fx(g.fx);results([c])}
+function debuff(){if(!pay('c',1000))return;const T=m=>Date.now()+m*6e4;
+ const E=[['15分間 ライフ祭（ボスLP3倍）',()=>G.buffs.lpx3=T(15)],['15分間 ダイヤ祭（ボス💎+1）',()=>G.buffs.diaFest=T(15)],['40京円ゲット',()=>G.money=Math.min(CAP,G.money+4e17)],['30分間 毎秒収入8倍',()=>G.buffs.inc8=T(30)],['10分間 ボスLP+5',()=>G.buffs.bossLp=T(10)],['10分間 ボス報酬+¥100万',()=>G.buffs.bossMoney=T(10)],['ダイヤ+10',()=>G.crystal+=10],['15分間 通常ガチャ半額',()=>G.buffs.normalHalf=T(15)],['LP+50',()=>G.lp+=50],['5分間 小ボスLP+2',()=>G.buffs.miniLp=T(5)],['基地容量+10（恒久）',()=>G.baseCap+=10]];
+ const e=E[Math.random()*E.length|0];e[1]();log('🧪 デバフガチャ ▶ '+e[0]);alert('🧪 '+e[0]);fx(['#0ff','🧪']);U()}
+const on=k=>G.buffs[k]&&G.buffs[k]>Date.now();
+/* ===== 基地/LP/研究 ===== */
+const A={
+expand(){const c=5e4*G.baseCap;if(G.money<c)return alert('お金不足（'+fmt(c)+'）');G.money-=c;G.baseCap+=5;log('基地拡張（容量+5）');U()},
+buyLP(){if(G.money<2e8)return alert('2億円必要');G.money-=2e8;G.lp++;log('LP購入（+1）');U()},
+accel(){if(G.lp<10)return alert('LP不足');G.lp-=10;G.buffs.boost=Date.now()+6e5;log('時間加速（10分間・収入5倍）');U()},
+noEsc(){if(G.lp<3)return alert('LP不足');G.lp-=3;noEscUntil=Date.now()+18e5;log('ボス逃走阻止（30分）');U()},
+lp2c(){if(G.lp<200)return alert('200LP必要');G.lp-=200;G.crystal++;log('200LP → 💎1');U()},
+close(id){$(id).classList.remove('on')},
+/* ボス */
+atk(){if(bHP<=0||!boss)return;bHP-=100+count('LEGEND')*150+(count('CHIMERA')+count('EVENT'))*500;if(bHP<=0){bHP=0;let lp=5;if(lifeFest())lp*=3;if(on('lpx3'))lp*=3;if(on('bossLp'))lp+=5;let c=0;if(diaFest()||on('diaFest'))c=1;
+  G.money=Math.min(CAP,G.money+(5e5+(on('bossMoney')?1e6:0))*(1+ef('boss')));G.lp+=lp;G.crystal+=c;G.bossKill++;log('⚔️ ボス撃破 ▶ '+boss.name+`（+${lp}LP${c?' +💎1':''}）`);obtain(clone(boss));boss=null;alert('ボス撃破！')}U()},
+force(){if(G.money<1e9)return alert('10億円必要');G.money-=1e9;const b=band();spawn(pickBoss(b||['M','N','E'][Math.random()*3|0]));log('💎 強制出現 ▶ '+boss.name);U()},
+mSpawn(){mb=MB[Math.random()*MB.length|0];mHP=mMax=mb.hp;$('mName').textContent=mb.name;U()},
+mAtk(){if(!mb)return;mHP=Math.max(0,mHP-(500+count('LEGEND')*200+count('CHIMERA')*700));if(mHP===0){mc++;const m=mc>=21?5:mc>=16?3:mc>=11?2:mc>=6?1.5:1;let lp=Math.floor(mb.lp*m)+(on('miniLp')?2:0);G.lp+=lp;log('⚔️ 小ボス撃破 ▶ '+mb.name+` ×${m}（+${lp}LP）`);mb=null;$('mName').textContent='撃破完了'}U()},
+diaGet(){if(G.diaStored<=0)return alert('回収なし');G.crystal+=G.diaStored;log('💎 ダイヤ回収 +'+G.diaStored);G.diaStored=0;U()},
+diaBuy(p,n){if(G.money<p)return alert(fmt(p)+'必要');G.money-=p;G.crystal+=n;log('💰 '+fmt(p)+' → 💎'+n);U()},
+/* ランク */
+rStart(){if(G.rank>=24)return alert('すでに最高ランクです');if(Date.now()<G.rankCd)return alert('あと'+Math.ceil((G.rankCd-Date.now())/6e4)+'分待機が必要です');rLog=RE[G.rank];rOn=true;rEnd=Date.now()+15000;log('🏆 ランク挑戦開始');rBar()},
+rAtk(){if(!rOn)return;const ld=Math.log10(Math.max(1,income()*10));if(rLog-ld<=15){const x=1-Math.pow(10,ld-rLog);if(x<=1e-9){rOn=false;G.rank++;G.rankDecay=Date.now();log('🏆 ランク昇格 ▶ '+RN[G.rank]);$('rTxt').textContent='昇格！';$('rHp').style.width='0';U();return}rLog+=Math.log10(x)}rBar()},
+/* 研究 */
+/* セーブ */
+saveOpen(){$('saveCode').value='';$('popS').classList.add('on')},
+async exp(){try{$('saveCode').value=await exportCode(G,$('savePass').value)}catch(e){alert('書き出し失敗：'+e.message)}},
+async imp(){try{const o=await importCode($('saveCode').value,$('savePass').value);checkSave(o);const g=norm(o);if(!confirm('現在のデータを上書きして読み込みます。よろしいですか？（現在のデータはバックアップされます）'))return;
+ const prev=G,cur=localStorage.getItem(KEY3);if(cur)localStorage.setItem('CEC_PREIMPORT',cur);G=g;ready=true;await doSave();if(saveErr){G=prev;throw new Error('保存に失敗したため元のデータに戻しました')}
+ ['inv','dex','ach','res','log','moon'].forEach(x=>D.add(x));evDirty=1;U();evRender();alert('読み込み完了')}catch(e){alert('読み込み失敗（既存データは変更されていません）：'+e.message)}},
+copy(){const t=$('saveCode');if(!t.value)return alert('先にコードを書き出してください');(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).then(()=>alert('コピーしました')).catch(()=>{t.select();try{document.execCommand('copy');alert('コピーしました')}catch(e){}})},
+async reset(){if(!confirm('全データを初期化します。よろしいですか？（直前のデータは暗号化バックアップとして残ります）'))return;try{const cur=localStorage.getItem(KEY3);if(cur)localStorage.setItem('CEC_PRERESET',cur)}catch(e){}G=def();ready=true;await doSave();['inv','dex','ach','res','log','moon'].forEach(x=>D.add(x));evDirty=1;U();evRender()},
+/* 交換 */
+trade(){const e=$('trErr');e.textContent='';try{if(!T)throw'交換が開始されていません';const raw=dec($('trIn').value.trim());const b=raw.b;if(Date.now()-b.t>6e5)throw'期限切れの呪文です';if(b.n===T.n)throw'自分の呪文は使えません';if(G.used.includes(b.n))throw'使用済みの呪文です';
+ const cat=ALL.concat(EXC).find(x=>b.c&&x.name===b.c.name);if(!cat||cat.type==='frontier')throw'交換できないキャラです';const cur=G.owned[T.i];if(!cur||cur.name!==T.name)throw'対象キャラが変更されました';
+ G.owned.splice(T.i,1);G.owned.push(clone(cat));G.used.push(b.n);if(G.used.length>200)G.used.shift();if(!G.dex.includes(cat.name))G.dex.push(cat.name);log('🔀 交換成立 ▶ '+cur.name+' ⇄ '+cat.name);T=null;A.close('popT');U('inv','dex')}catch(x){e.textContent=typeof x==='string'?x:'呪文が読み込めません（形式エラー）'}},
+/* EZ */
+ezOpen(){const p=top3();$('ezG').innerHTML=p.map(o=>card(o.c)).join('');$('ezW').textContent=p.length<3?'条件に合うキャラが3体いません':'';$('popE').classList.add('on')},
+ezDo(){const p=top3();if(p.length<3)return alert('条件に合うキャラが3体いません');p.map(o=>o.i).sort((a,b)=>b-a).forEach(i=>G.owned.splice(i,1));G.ez++;G.money=Math.min(CAP,G.money+1e4);log('🪙 エモズー交換 ▶ 上位3体消費 → +1EZ / +¥10,000');A.close('popE');U('inv')}};
+window.A=A;
+const top3=()=>G.owned.map((c,i)=>({c,i})).filter(o=>!o.c._moon&&o.c.type!=='frontier').sort((a,b)=>b.c.sell-a.c.sell).slice(0,3);
+/* 交換呪文 */
+const SALT='CEC-trade-2026';let T=null;
+function hash(s){s+=SALT;let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return h.toString(16)}
+function enc(b){return btoa(unescape(encodeURIComponent(JSON.stringify({b,s:hash(JSON.stringify(b))}))))}
+function dec(t){const r=JSON.parse(decodeURIComponent(escape(atob(t))));if(!r||!r.b||hash(JSON.stringify(r.b))!==r.s)throw'呪文が改ざんされているか壊れています';return r}
+/* ===== ボス ===== */
+let boss=null,bHP=0,bMax=0,slot='',noEscUntil=0,mb=null,mHP=0,mMax=0,mc=0,rOn=false,rLog=0,rEnd=0;
+const MB=[{name:'🤖 スクラップ・タイタン',hp:12000,lp:1},{name:'☣️ 汚染融合コア',hp:15000,lp:1},{name:'⚡ ライトニング捕食機',hp:10000,lp:1},{name:'🛰️ 軌道破壊兵器β',hp:22000,lp:1},{name:'🔥 プラズマ暴走炉',hp:40000,lp:1}];
+const band=()=>{const h=new Date().getHours();return h>=6&&h<=7?'M':h>=12&&h<=13?'N':h>=18&&h<=19?'E':''};
+const monthPool=()=>{const m=new Date().getMonth();return [EV[m],EV[(m+1)%12],EV[(m+2)%12]]};
+const rnd=a=>a[Math.random()*a.length|0];
+const diaFest=()=>{const n=new Date(),d=n.getDay(),h=n.getHours();return [2,5,6,0].includes(d)&&h>=12&&h<14};
+const lifeFest=()=>{const n=new Date(),d=n.getDay(),h=n.getHours();return [1,3,5].includes(d)&&h>=12&&h<14};
+function pickBoss(b){if(b==='M')return clone(rnd(CHIM));if(b==='N')return clone(rnd(monthPool()));return clone(Math.random()<.5?rnd(CH.filter(c=>['LEGEND','SUPER','ELITE'].includes(c.rarity))):rnd(monthPool()))}
+function spawn(c){boss=c;bHP=bMax=Math.min(5e6,Math.max(1e4,Math.floor(c.sell*2)));$('bName').textContent='👹 ボス出現 ▶ '+c.name}
+function bossAuto(){const b=band();if(!b){if(!boss||Date.now()<noEscUntil)return;boss=null;bHP=bMax=0;$('bName').textContent='ボス待機中...';return}
+ const d=new Date(),k=d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate()+'-'+d.getHours();if(slot===k&&boss)return;if(slot===k&&!boss&&bHP===0&&bMax>0)return;slot=k;spawn(pickBoss(b));log('👹 ボス出現 ▶ '+boss.name)}
+function bossBar(){const f=diaFest(),l=lifeFest();$('bHp').style.width=(bMax>0?bHP/bMax*100:0)+'%';$('bTxt').innerHTML=bMax>0?`${bHP.toLocaleString()} / ${bMax.toLocaleString()}`+(f?'<br>💎ダイヤ祭':'')+(l?'<br>❤️ライフ祭':''):'06-07 / 12-13 / 18-19時に出現'+(f?'<br>💎ダイヤ祭開催中':'')+(l?'<br>❤️ライフ祭開催中':'');
+ $('mHp').style.width=(mMax>0?mHP/mMax*100:0)+'%';$('mTxt').textContent=mMax>0?mHP+' / '+mMax+' | '+mc+'連勝':'小ボス出現待機'}
+function rBar(){const ex=rLog<300?fmt(Math.pow(10,rLog)):'1e'+Math.round(rLog);$('rHp').style.width=Math.min(100,Math.pow(10,rLog-RE[G.rank])*100)+'%';$('rTxt').innerHTML=ex.replace('¥','')+'<br>残り'+Math.max(0,Math.ceil((rEnd-Date.now())/1000))+'秒'}
+/* ===== 収入・タイマー ===== */
+function income(){let s=0;for(const c of G.owned)s+=Math.floor(c.sell/20);if(on('boost'))s*=5;if(on('inc8'))s*=8;s*=1+ef('inc')+beingInc();return Math.min(CAP,s)}
+function moonRefresh(){G.moon=[];for(let i=0;i<5;i++)G.moon.push(clone(rnd(ALL)));G.moonT=Date.now();U('moon')}
+setInterval(()=>{
+ G.money=Math.min(CAP,G.money+income());
+ const n=Date.now(),g=Math.floor((n-G.diaT)/18e5);if(g>0){G.diaStored+=g*5;G.diaT+=g*18e5}
+ const rem=moonIv()-(n-G.moonT);if(rem<=0)moonRefresh();$('moonT').textContent='次回更新まで '+Math.max(0,Math.ceil(rem/1000))+'秒';
+ if(rOn){if(n>=rEnd){rOn=false;G.rankCd=n+36e5;log('❌ ランク挑戦失敗（1時間待機）');$('rTxt').textContent='挑戦失敗';}else rBar()}
+ if(n-G.rankDecay>2592e6){G.rank=Math.max(0,G.rank-2);G.rankDecay=n;log('📉 ランクが2段階低下')}
+ U()},1000);
+setInterval(()=>{if(Math.random()<.05){G.money=Math.min(CAP,G.money+5e5);log('🌌 FEVER TIME（+¥500,000）')}if(G.research.auto>0&&Math.random()<.02*G.research.auto){G.crystal++;log('🤖 自動研究AI ▶ 結晶+1')}U()},3e4);
+setInterval(()=>{bossAuto();U()},6e4);setInterval(save,5e3);
+addEventListener('beforeunload',save);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});
+/* ===== 異世界イベント（6種） ===== */
+const rw=(L,t,f)=>L.map((s,i)=>{const q=s.split('|'),c={emoji:q[0],name:q[1],rarity:q[2],desc:q[3],type:t};c.sell=Math.pow(10,f(q[2],i));if(q[4])c.fx={k:q[4],v:+q[5]};return c});
+const PL=[
+['🌼|∞フローラ・ゼロ|創世級|生産+300%|inc|3','🌻|太陽喰いのヒマワリ|恒星級|生産+200%|inc|2','⚜️|白銀の聖百合|神聖級|味方全体を支援（表示のみ）','🌸|虹彩桜姫|奇跡級|ボス報酬+200%|boss|2','🌾|星界タンポポ|星界級|幸運+30%|luck|.3','🪷|黄金蓮皇|皇帝級|生産+500%|inc|5','🔔|天鐘ブルーベル|時空級|時間系+200%|time|2','🌷|七色チューリップ|変異級|成長で進化（表示のみ）','🥀|光闇反転花|禁忌級|生産+800%|inc|8','🌺|花園の終極神・アルカディア|楽園の頂点|生産+2000%|inc|20'],
+['🐲|水晶竜アクアノヴァ|竜神級|ボス報酬+500%|boss|5','🪼|深淵クラゲ・ネビュラ|深海級|生産+300%|inc|3','🦅|蒼晶フェニックス|不滅級|復活強化（表示のみ）','🦑|万象結晶イカ|解析級|解析（表示のみ）','🐟|虹晶コイ・ミラクル|幸運級|幸運+50%|luck|.5','👸|水晶女王ミレニア|女王級|生産+600%|inc|6','🕳️|虚空晶核ヴォイド|虚無級|ボス報酬+800%|boss|8','🐍|時晶ウロボロス|時空級|時間系+500%|time|5','🗿|終末晶巨兵|終末級|ボス報酬+1000%|boss|10','💠|水晶湖の超越神・ゼノクリスタ|湖の最終存在|生産+3000%|inc|30'],
+['👑|忘却王オブリビオン|古代王級|生産+1000%|inc|10','📕|禁書生命体グリモア|禁書級|研究加速（表示のみ）','⚔️|無銘の亡霊騎士|亡霊級|ボス報酬+1000%|boss|10','🦁|永劫の石像スフィンクス|守護級|耐久（表示のみ）','⏳|逆時砂時計クロノス|時間遺物級|時間系+1000%|time|10','🐦‍⬛|記憶喰らいレイヴン|記憶級|幸運+40%|luck|.4','⚙️|遺跡機構スカラベ|機構級|宝箱報酬+500%|chest|5','👤|無貌神ノーネーム|正体不明級|生産+2000%|inc|20','❤️‍🔥|滅文明の心臓|文明終焉級|生産+5000%|inc|50','📜|終古神アーカイブ・ゼロ|遺跡最深部級|生産+8000%|inc|80'],
+['✨|創世外神オリジン|創世超越級|生産+20000%|inc|200','🌑|絶対虚無ノクス|虚無超越級|ボス報酬+5000%|boss|50','🐉|無限竜インフィニティア|無限竜級|生産+30000%|inc|300','🔷|七次元プリズム|次元超越級|生産+10000%|inc|100','🕰️|時間支配者ティメリア|時間超越級|時間系+5000%|time|50','🦊|九界神狐キュリオス|幸運超越級|幸運+80%|luck|.8','⚖️|法則執行者ジャッジメント|法則超越級|ボス報酬+8000%|boss|80','☯️|表裏神パラドクサ|矛盾超越級|生産+15000%|inc|150','🥚|全能の原初卵|全能原初級|生産+50000%|inc|500','⚫|万象の外側・∅（ゼロポイント）|全領域最終級|生産+100000%|inc|1000']];
+const PC=PL.map((L,a)=>rw(L,'para',(r,i)=>[40,60,80,105][a]+i*(a<3?1.5:3.5)));
+const MK=['🍡|バグもち|ノーマル|生産+100%|inc|1','🫧|シャドウゼリー|ノーマル|戦闘報酬+100%|boss|1','🪙|エラーコイン|ノーマル|通貨+300%|inc|3','🎭|なぞのお面|ノーマル|幸運+50%|luck|.5','👻|データ幽霊|ノーマル|探索報酬+150%|chest|1.5','🐈‍⬛|ノイズキャット|ノーマル|クリ率+100%（表示のみ）','🧊|未知の立方体|ノーマル|全能力+50%|inc|.5','🍄|バグキノコ|ノーマル|重複ボーナス（表示のみ）',
+'🐲|暗号竜コードラ|レア|ボス報酬+500%|boss|5','⚫|ミニブラックホール|レア|生産+1000%|inc|10','🐇|クロックラビット|レア|時間系+1000%|time|10','📦|ミミック・ゼロ|レア|宝箱+800%|chest|8','🐺|冥界ウルフ|レア|ボス報酬+1000%|boss|10','🦋|パラドックスバタフライ|レア|幸運+50%|luck|.5',
+'🟣|暗黒皇帝スライム|超レア|ボス報酬+1000%|boss|10','🔄|反転神フォルス|超レア|弱体を反転（表示のみ）','🥚|虹核ドラゴンエッグ|超レア|成長+5000%|inc|50','😈|堕天使エラーゼル|超レア|全能力+5000%|inc|50','🔮|未知神エニグマ|神秘|生産+10000%|inc|100','🕳️∅|∅・ゼロデイ|禁忌|全能力+50000%|inc|500'];
+const TB={ノーマル:34,レア:38,超レア:44,神秘:56,禁忌:70},cn={};
+const MKC=rw(MK,'market',r=>TB[r]+(cn[r]=(cn[r]||0)+.7));
+const EXC=[...PC.flat(),...MKC];
+const PNAME=['光の花園','水晶湖','忘却遺跡','隠し領域'],PDESC=['青白く光る花々が咲く基本エリア。','青白い水晶が湖面に浮かぶ。水辺から小さな生物の気配がする。','古代文明の遺跡。忘却された存在が眠る。','世界の外側。法則すら曖昧な最深部。'];
+const BE=[['⭐','アストラゼロ','星界の観測者','通貨獲得+200%'],['♾️','エターナル','無限を喰らう者','高レア排出の重み+100%'],['⏱️','クロノヴェイル','時空を超える神','イベント待機-50%'],['🌑','ノクスヴォイド','絶対虚無','交換の高レア重み×3'],['🔷','プリズマティカ','七次元の神','楽園の発生率×3'],['⚖️','ジャッジメントΩ','法則の執行者','捕獲率に最低5%保証'],['🌱','ジェネシス','原初の創世体','強化素材+200%'],['🌀','パラドクサ','現実崩壊神','オフライン報酬×5'],['⚡','オムニゼウス','万象全能体','他の能力を2倍に増幅'],['∅','∅','神域の外側','通貨・ガチャ・素材に+400%']];
+const BR=[.5,.4,.3,.2,.15,.1,.05,.03,.01],RK=['第一階層・星観','第二階層・歪曲','第三階層・断絶','第四階層・虚像','第五階層・特異','第六階層・終端','第七階層・神域'];
+const EVN={paradise:'未知の楽園',market:'闇交換市場',copy:'複製異世界',blood:'ブラッドムーンロード',white:'ホワイトホール変異',divine:'神域生命体観測'};
+const MUT=[['能力変異',45,()=>1.5+Math.random()*1.5],['特性変異',25,()=>2+Math.random()*2],['極性変異',15,()=>5],['異常変異',10,()=>10+Math.random()*10],['超変異',5,()=>50+Math.random()*50]];
+const BM=[1,1.5,2.5,4,8],BC=[20,60,150,400],bmax=c=>(c.base||c.sell)<1e6?2:(c.base||c.sell)<1e30?3:4;
+const E=()=>{const e=G.ev=(G.ev&&typeof G.ev==='object')?G.ev:{};e.paradise=e.paradise||{visits:0,hidden:false,seen:false,prog:{},got:[]};e.copies=Array.isArray(e.copies)?e.copies:[];e.beings=e.beings||{};e.dexSeen=Array.isArray(e.dexSeen)?e.dexSeen:[];['void','records','divineCd','roll','last','playAcc'].forEach(k=>e[k]=num(e[k],0));G.mat=Math.max(0,num(G.mat,0));return e};
+const b=(a,i,t,c,u)=>`<button class="${c||''}" data-act="${a}" data-i="${i}"${u?` data-u="${u}"`:''}>${t}</button>`;
+const mm=ms=>{ms=Math.max(0,Math.ceil(ms/1000));return Math.floor(ms/60)+':'+String(ms%60).padStart(2,'0')};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const give=c=>{const n=clone(c);n.uid=uid();obtain(n);return n};
+const bo=i=>(E().beings[i]|0)>0,amp=()=>bo(8)?2:1;
+const beingInc=()=>(bo(0)?2*amp():0)+(bo(9)?4:0),gachaBonus=()=>(bo(1)?amp():0)+(bo(9)?4:0),matMul=()=>1+(bo(6)?2*amp():0)+(bo(9)?4:0),offMul=()=>1+(bo(7)?4*amp():0);
+const ef=k=>{let s=0;for(const c of G.owned)if(c.fx&&c.fx.k===k)s+=c.fx.v;return Math.min(s,1e6)};
+const moonIv=()=>9e5/(1+Math.min(ef('time'),9));
+const addMat=n=>{G.mat=Math.min(CAP,num(G.mat)+Math.floor(n*matMul()))};
+const evName=id=>id==='paradise'&&!E().paradise.seen?'？？？（正体不明の異常）':EVN[id];
+const cvMat=c=>Math.floor(Math.max(1,Math.round(Math.log10(Math.max(10,c.sell))*c.mult/2))*matMul());
+const cvYen=c=>Math.floor(Math.min(CAP,c.sell*c.mult/4));
+const pcost=en=>5*(en.j+1)*(en.a+1);
+const prate=en=>{const e=E(),d=e.cur.d,pr=e.paradise.prog[en.a+'_'+en.j]|0;if(pr>=5)return 1;let r=Math.max(.03,.55-en.j*.055)*(1+(d.bless||0)+ef('luck'))+pr*.12;if(bo(5))r=Math.max(r,.05);return Math.min(.95,r)};
+let wh=[],evDirty=1;const EVA={};
+function mut(){let r=Math.random()*100;for(const m of MUT){r-=m[1];if(r<=0)return [m[0],+m[2]().toFixed(2)]}return [MUT[0][0],1.5]}
+function mkStops(P){const s=[];for(let i=0;i<5;i++){const r=Math.random()*100;const t=r<50?'enc':r<70?'chest':r<82?'trace':r<92?'bless':(P.hidden?'enc':'hid');let a=rnd([0,1,2]);if(P.hidden&&t==='enc'&&Math.random()<.3)a=3;s.push({a,t})}if(!s.some(x=>x.t==='enc'))s[4].t='enc';return s}
+function evStart(id){const e=E(),n=Date.now();let d={},end=0;
+ if(id==='paradise'){e.paradise.visits++;d={stops:mkStops(e.paradise),i:0,enc:null,bless:0}}
+ else if(id==='market'){end=n+6e5;d={n:0}}else if(id==='copy')d={left:8,gen:0,conv:0,reward:false};
+ else if(id==='blood'){end=n+6e5;d={}}else if(id==='white'){end=n+3e5;d={t:0,ez:0};wh=[]}
+ else{end=n+3e5;d={next:n,enc:null,catching:false,n:0};e.playAcc=0}
+ e.cur={id,start:n,end,d};log('🌀 異常発生 ▶ '+evName(id));save();evDirty=1;
+ alert('⚠️ '+(id==='paradise'?'正体不明の異常を検知しました':EVN[id]+'が発生しました'));tab('evt');U()}
+function evEnd(){const e=E(),c=e.cur;if(!c)return;
+ if(c.id==='divine'){if([0,1,2,3,4,5,6,7,8].every(i=>e.dexSeen.includes(i))&&!bo(9)&&!e.dexSeen.includes(9))e.zeroForce=true;e.playAcc=0;log('観測記録 '+e.records+'件')}
+ log('🌀 イベント終了 ▶ '+EVN[c.id]);e.cur=null;wh=[];save();evDirty=1;U('inv');alert('🌀 '+EVN[c.id]+'が終了しました'+(c.id==='divine'?'\n観測 '+c.d.n+'回／捕獲 '+(c.d.got|0)+'体／記録 '+e.records+'件':''))}
+function roll(m){const e=E(),n=Date.now();const L=[['paradise',.003*(bo(4)?3*amp():1)],['market',.01],['copy',.008],['blood',.008],['white',.01]];
+ for(const [id,p] of L)if(Math.random()<Math.min(.9,p*m)){evStart(id);return true}return false}
+function divSpawn(c,n){const d=c.d,e=E();if(n<d.next||n>=c.end)return;d.next=n+6e4;if(d.enc||d.catching)return;let i=rnd([0,1,2,3,4,5,6,7,8]);if(e.zeroForce){i=9;e.zeroForce=false}
+ d.enc={i,f:0};d.n++;e.records++;if(!e.dexSeen.includes(i))e.dexSeen.push(i);log('🔭 観測 ▶ '+BE[i][1]);if(i===9)fx(['#000','⚠️']);evDirty=1;save()}
+let pend=null;
+function evTick(){const e=E(),n=Date.now(),c=e.cur;e.last=n;const dt=Math.min(Math.max(0,n-(e.lastTick||n)),2500);e.lastTick=n;
+ if(pend&&!c&&!document.querySelector('.pop.on')){const id=pend;pend=null;evStart(id);return}
+ if(ready){const r=playStep(e,dt,!document.hidden,!!c||!!pend,Math.random,bo(2)?4.5e5:9e5);if(r==='start')pend='divine';else if(r==='miss')log('🔭 神域観測の抽選：不発（次の15分を測定）')}
+ if(!c){if(n-e.roll>=6e4&&!document.querySelector('.pop.on')){e.roll=n;roll(1)}return}
+ if(c.end&&n>=c.end&&!(c.d&&c.d.catching)){evEnd();return}
+ if(c.id==='divine')divSpawn(c,n);
+ if(c.id==='white'){const o=wh.length;wh=wh.filter(x=>x.t>n);if(wh.length!==o)evDirty=1;if(wh.length<8&&n<c.end){const u=wh.map(x=>x.s),fr=[...Array(12).keys()].filter(i=>!u.includes(i));if(fr.length){wh.push({id:uid(),s:rnd(fr),ez:Math.random()<.1,t:n+5000});evDirty=1}}}
+ const t=$('evT');if(t&&c.end)t.textContent=mm(c.end-n);
+ if(evDirty&&$('p_evt').classList.contains('on'))evRender()}
+/* --- 操作 --- */
+EVA.obs=()=>{if(E().cur)return alert('すでにイベント発生中です');if(G.lp<3)return alert('LP不足');G.lp-=3;if(!roll(25))log('🔭 観測 ▶ 異常なし')};
+EVA.pexp=()=>{const P=E().paradise,d=E().cur.d,s=d.stops[d.i];if(!s||d.enc)return;P.seen=true;d.msg='';
+ if(s.t==='enc'){const w=PC[s.a].map((_,j)=>1/Math.pow(1+j,1.6));let r=Math.random()*w.reduce((x,y)=>x+y),j=0;for(;j<9;j++){r-=w[j];if(r<=0)break}d.enc={a:s.a,j,att:0};return}
+ if(s.t==='chest'){const c=Math.floor((3+Math.random()*8)*(1+ef('chest')));G.crystal+=c;addMat(5+Math.random()*10);d.msg='📦 宝箱：💎+'+c+' と強化素材を入手'}
+ else if(s.t==='trace'){P.hidden=true;d.msg='🔍 謎の痕跡：隠し領域への手がかりを得た'}
+ else if(s.t==='bless'){d.bless=.15;d.msg='🌸 楽園の祝福：捕獲率+15%'}
+ else{P.hidden=true;d.stops.splice(d.i+1,0,{a:3,t:'enc'});d.msg='🕳️ 隠し地点を発見！地点が追加された'}
+ log(d.msg);d.i++;pEnd(d)};
+function pEnd(d){if(d.i>=d.stops.length&&!d.enc)evEnd()}
+EVA.pcatch=()=>{const e=E(),P=e.paradise,d=e.cur.d,en=d.enc;if(!en)return;if(G.owned.length>=G.baseCap)return alert('基地容量不足');const c=pcost(en);if(G.crystal<c)return alert('💎'+c+'必要（所持'+G.crystal+'）');G.crystal-=c;const k=en.a+'_'+en.j,pr=P.prog[k]|0;
+ if(Math.random()<prate(en)){const n=give(PC[en.a][en.j]);P.got.push(n.uid);P.prog[k]=0;d.msg='✅ '+n.name+'を捕獲！';log(d.msg);d.enc=null;d.i++;pEnd(d)}
+ else{P.prog[k]=Math.min(5,pr+1);en.att++;d.msg='❌ 捕獲失敗（進行度 '+P.prog[k]+'/5）';log(d.msg);if(en.att>=3){d.msg+=' 逃げられた';d.enc=null;d.i++;pEnd(d)}}};
+EVA.pflee=()=>{const d=E().cur.d;d.enc=null;d.i++;pEnd(d)};
+EVA.mk=i=>{const e=E(),c=e.cur;if(!c||c.id!=='market'||Date.now()>=c.end)return;const o=G.owned[i];if(!o)return;
+ const W={ノーマル:40,レア:30,超レア:20,神秘:8*(1+(bo(3)?2*amp():0)),禁忌:2*(1+(bo(3)?2*amp():0))};let t=0;for(const k in W)t+=W[k];let r=Math.random()*t,tier='ノーマル';for(const k in W){r-=W[k];if(r<=0){tier=k;break}}
+ G.owned.splice(i,1);const n=give(rnd(MKC.filter(x=>x.rarity===tier)));c.d.n++;log('🕳️ 闇交換 ▶ '+o.name+' → '+n.name+'（'+tier+'）');if(tier==='禁忌')fx(['#000','∅']);alert('交換結果：'+n.emoji+' '+n.name+'［'+tier+'］')};
+EVA.cpy=i=>{const c=E().cur,d=c.d,o=G.owned[i];if(!o||d.left<=0)return alert('生成回数がありません');const m=mut();E().copies.push({uid:uid(),src:o.name,emoji:o.emoji,type:m[0],mult:m[1],sell:o.sell});d.left--;d.gen++;log('🧬 変異コピー生成 ▶ '+o.name+'（'+m[0]+' ×'+m[1]+'）')};
+function cpCheck(){const c=E().cur;if(!c||c.id!=='copy')return;const d=c.d;if(d.gen>=5&&d.conv>=5&&!d.reward){d.reward=true;G.crystal+=30;addMat(50);log('🏆 複製異世界クリア（💎30＋素材50）');evEnd()}}
+function cvt(u,m){const x=E().copies,k=x.findIndex(c=>c.uid===u);if(k<0)return;const c=x.splice(k,1)[0];if(m){const a=cvMat(c);addMat(0);G.mat=Math.min(CAP,G.mat+a);log('🧬 素材に変換 +'+a)}else{const y=cvYen(c);G.money=Math.min(CAP,G.money+y);log('🧬 通貨に変換 +'+fmt(y))}const e=E().cur;if(e&&e.id==='copy'){e.d.conv++;cpCheck()}}
+EVA.cvm=(i,u)=>cvt(u,1);EVA.cvy=(i,u)=>cvt(u,0);
+EVA.bl=i=>{const c=G.owned[i];if(!c)return;const s=c.bm|0;if(s>=bmax(c))return alert('最大段階です');const k=BC[s];if(G.mat<k)return alert('強化素材が足りません（必要'+k+' / 所持'+G.mat+'）');G.mat-=k;c.base=c.base||c.sell;c.bm=s+1;c.sell=Math.min(CAP,c.base*BM[c.bm]);log('🩸 血月強化 ▶ '+c.name+' 段階'+c.bm);U('inv')};
+EVA.wh=(i,u)=>{const c=E().cur;if(!c||c.id!=='white'||Date.now()>=c.end)return;const k=wh.findIndex(x=>x.id===u);if(k<0)return;const x=wh.splice(k,1)[0];if(x.ez){G.ez++;c.d.ez++}else{const m=Math.floor((3+Math.random()*6)*matMul());G.mat=Math.min(CAP,G.mat+m);c.d.t+=m}evDirty=1};
+EVA.dcatch=()=>{const e=E(),d=e.cur.d,en=d.enc;if(!en||d.catching)return;if(en.i===9&&e.void<10)return alert('虚無の結晶が10個必要です（所持'+e.void+'）');d.catching=true;evRender();
+ setTimeout(()=>{const c=E().cur;if(!c||c.id!=='divine')return;const dd=c.d,en=dd.enc;if(!en)return;const i=en.i;let ok;if(i===9){e.void-=10;ok=true}else ok=Math.random()<Math.min(.95,Math.max(bo(5)?.05:0,BR[i]*(1+.05*Math.floor(e.records/10))));dd.catching=false;
+  if(ok){if(bo(i)){G.money=Math.min(CAP,G.money+1e15);let v='';if(Math.random()<.05){e.void++;v=' ＋虚無の結晶'}log('重複捕獲 ▶ '+fmt(1e15)+v)}else log('✅ 捕獲成功 ▶ '+BE[i][1]);e.beings[i]=(e.beings[i]|0)+1;dd.got=(dd.got|0)+1;dd.enc=null}
+  else{en.f++;log('❌ 捕獲失敗 ▶ '+BE[i][1]);if(en.f>=2){log('💨 逃走 ▶ '+BE[i][1]);dd.enc=null}}
+  save();evDirty=1;U();evRender()},3000)};
+EVA.dflee=()=>{const d=E().cur.d;if(!d.catching){d.enc=null}};
+/* --- 画面 --- */
+const own=(act,asc,n)=>G.owned.map((c,i)=>({c,i})).sort((x,y)=>asc?x.c.sell-y.c.sell:y.c.sell-x.c.sell).slice(0,n||24).map(o=>`<div class="row"><span>${esc(o.c.emoji)} ${esc(o.c.name)}${o.c.bm?' 🩸'+o.c.bm:''}<br><span class="sm">${fmt(o.c.sell)}</span>${act==='bl'?bl(o.c):''}</span>${act==='bl'?(bl2(o.c)?'':b('bl',o.i,'強化')):b(act,o.i,act==='mk'?'交換':'コピー')}</div>`).join('')||'<div class="sm">キャラがいません</div>';
+const bl=c=>{const s=c.bm|0,m=bmax(c);return `<br><span class="sm">段階 ${s}/${m}｜${s>=m?'最大':'必要素材 '+BC[s]+'（所持'+G.mat+'）→ '+fmt((c.base||c.sell)*BM[s+1])}</span>`};
+const bl2=c=>(c.bm|0)>=bmax(c);
+function evBody(c){const e=E(),d=c.d,t=c.end?`残り <b id="evT">${mm(c.end-Date.now())}</b>`:'';let h=`<div class="box"><div style="font-weight:900;font-size:17px">${evName(c.id)}</div><div class="sm">${t}</div>`;
+ if(c.id==='paradise'){const P=e.paradise,s=d.stops[d.i];h+=`<div class="sm">第${Math.min(d.i+1,d.stops.length)}地点 / 全${d.stops.length}地点</div>${d.msg?`<div style="margin:6px 0">${esc(d.msg)}</div>`:''}`;
+  if(d.enc){const ch=PC[d.enc.a][d.enc.j];h+=`<div style="font-size:40px">${esc(ch.emoji)}</div><b>${esc(ch.name)}</b><div class="sm">${PNAME[d.enc.a]}｜${esc(ch.rarity)}｜${esc(ch.desc)}<br>売却 ${fmt(ch.sell)}<br>捕獲進行度 ${P.prog[d.enc.a+'_'+d.enc.j]|0} / 5｜成功率 ${(prate(d.enc)*100).toFixed(1)}%｜消費 💎${pcost(d.enc)}</div><div class="btns">${b('pcatch',0,'捕獲に挑戦','gd')}${b('pflee',0,'見送る','rd')}</div>`}
+  else if(s)h+=`<div style="margin-top:8px;font-size:18px">${PNAME[s.a]}</div><div class="sm">${PDESC[s.a]}</div><div class="btns">${b('pexp',0,'探索する')}</div>`}
+ else if(c.id==='market')h+=`<div class="err">⚠️ 交換すると元のキャラクターを失います（確認画面なし・即時）</div><div class="sm">交換回数 ${d.n}｜神秘8%・禁忌2%</div></div><div style="margin-top:8px">${own('mk',1,40)}</div><div>`;
+ else if(c.id==='copy')h+=`<div class="sm">生成 ${d.gen}/5｜変換 ${d.conv}/5｜残り生成回数 ${d.left}<br>複製元は消えません</div></div><div style="margin-top:8px">${own('cpy',0,24)}</div><div>`;
+ else if(c.id==='blood')h+=`<div class="sm">🩸 強化素材 ${G.mat.toLocaleString()}｜強化は恒久的に維持されます</div></div><div style="margin-top:8px">${own('bl',0,24)}</div><div>`;
+ else if(c.id==='white')h+=`<div class="sm">素材 +${d.t}｜🪙えもずー +${d.ez}｜タップで回収！</div><div style="position:relative;height:260px;border:1px solid #fff4;border-radius:12px;margin-top:8px;overflow:hidden;background:radial-gradient(circle,#fff3,transparent 70%)">${wh.map(x=>`<button data-act="wh" data-u="${x.id}" style="position:absolute;left:${(x.s%4)*25+2}%;top:${Math.floor(x.s/4)*33+3}%;width:21%;height:28%;min-height:0;font-size:26px;padding:0">${x.ez?'🪙':'🔩'}</button>`).join('')}</div>`;
+ else{const en=d.enc;h+=`<div class="sm">観測 ${d.n}回｜記録 ${e.records}件（図鑑倍率 ×${(1+.05*Math.floor(e.records/10)).toFixed(2)}）｜虚無の結晶 ${e.void}/10</div>`;
+  if(en){const B=BE[en.i];h+=`<div style="font-size:40px;${en.i===9?'filter:drop-shadow(0 0 10px red)':''}">${B[0]}</div><b>${B[1]}</b> <span class="sm">— ${B[2]}</span><div class="sm">${RK[en.i===9?6:Math.floor(en.i*6/9)]}｜${B[3]}<br>${en.i===9?'⚠️ 虚無の結晶10個で確定捕獲':'捕獲率 '+(Math.min(.95,Math.max(bo(5)?.05:0,BR[en.i]*(1+.05*Math.floor(e.records/10))))*100).toFixed(1)+'%｜失敗 '+en.f+'/2で逃走'}</div><div class="btns">${d.catching?'<button disabled>捕獲中…</button>':b('dcatch',0,'捕獲する','gd')+b('dflee',0,'見送る','rd')}</div>`}
+  else h+='<div class="sm" style="margin-top:8px">次の出現を待っています（60秒ごと）</div>'}
+ return h+'</div>'}
+function evHtml(){const e=E(),c=e.cur;let h=`<div class="sec"><div class="ttl">🌀 異世界イベント</div>`;
+ if(c)h+=evBody(c);else{const cd=`<br>神域観測の抽選まで 約${Math.max(0,Math.ceil(((bo(2)?4.5e5:9e5)-e.playAcc)/6e4))}分（プレイ時間で加算／当選80%）`;h+=`<div class="sm">発生中の異世界はありません。通常プレイ中に超レア確率で発生します。${cd}</div><div class="btns">${b('obs',0,'🔭 異世界を観測（3LP）','gd')}</div>`}
+ h+=`<div class="sm" style="margin-top:8px">楽園訪問 ${e.paradise.visits}回｜🔩 強化素材 ${G.mat.toLocaleString()}</div></div>`;
+ if(e.copies.length)h+=`<div class="sec"><div class="ttl">🧬 未変換コピー（${e.copies.length}）</div>${e.copies.map(x=>`<div class="row"><span>${esc(x.emoji)} ${esc(x.src)}<br><span class="sm">${esc(x.type)} ×${x.mult}｜素材${cvMat(x)} / ${fmt(cvYen(x))}</span></span><span>${b('cvm',0,'素材','',x.uid)}${b('cvy',0,'通貨','pk',x.uid)}</span></div>`).join('')}</div>`;
+ h+=`<div class="sec"><div class="ttl">🔭 神域生命体（常時発動）</div><div class="grid">${BE.map((B,i)=>{const g=bo(i),s=e.dexSeen.includes(i);return `<div class="card ${g?'':'lock'}"><div class="e">${s?B[0]:'❓'}</div><div class="n">${s?B[1]:'？？？'}${g?' ×'+e.beings[i]:''}</div><div class="r">${s?B[3]:''}</div></div>`}).join('')}</div></div>`;return h}
+function evRender(){const x=$('evtBox');if(x)x.innerHTML=evHtml();evDirty=0}
+function evInit(){const e=E();if(e.cur&&e.cur.d)e.cur.d.catching=false;wh=[];
+ if(e.last){const s=Math.min(28800,(Date.now()-e.last)/1000);if(s>60){const g=Math.floor(Math.min(CAP,income()*s*.2*offMul()));G.money=Math.min(CAP,G.money+g);log('💤 オフライン報酬 '+fmt(g)+'（'+Math.floor(s/60)+'分）')}}
+ e.roll=Date.now();e.last=Date.now();
+ $('evtBox').addEventListener('click',ev=>{const t=ev.target.closest('button');if(!t||t.dataset.act==='wh')return;const f=EVA[t.dataset.act];if(f){f(+t.dataset.i,t.dataset.u);save();U();evRender()}});
+ $('evtBox').addEventListener('pointerdown',ev=>{const t=ev.target.closest('[data-act="wh"]');if(t){EVA.wh(0,t.dataset.u);save();evRender();U()}});
+ $('tabs').addEventListener('click',()=>{evDirty=1});setInterval(evTick,1000);evRender()}
+
+/* ===== UI構築・イベント ===== */
+const TABS=[['home','基地'],['dex','図鑑'],['ach','実績'],['boss','ボス'],['res','研究所'],['log','ログ'],['mini','小ボス'],['moon','ムーンロード'],['dia','ダイヤルーム'],['rank','ランク'],['evt','🌀異世界'],['blog','公式ブログ']];
+function tab(id){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='p_'+id));document.querySelectorAll('.tabBtn').forEach(b=>b.classList.toggle('on',b.dataset.t===id));try{history.replaceState(null,'','#'+id)}catch(e){}}
+async function init(){
+ await load();
+ $('tabs').innerHTML=TABS.map(t=>`<button class="tabBtn" data-t="${t[0]}">${t[1]}</button>`).join('');
+ $('tabs').addEventListener('click',e=>{const b=e.target.closest('.tabBtn');if(b)tab(b.dataset.t)});
+ const lab=(c,p)=>c==='m'?fmt(p):c==='c'?'💎'+p.toLocaleString():c==='l'?p+'LP':'💰'+p+' EZ';
+ $('gachas').innerHTML=`<button data-g="n1">通常ガチャ<br>¥3,000</button><button data-g="n10">通常10連<br>¥30,000</button><button class="pk" data-g="l1">LIFEガチャ<br>20LP</button><button class="pk" data-g="l10">LIFE10連<br>200LP</button>`
+  +GA.map((g,i)=>`<button class="${g.c==='e'?'gd':'dk'}" data-g="${i}">${g.t}<br>${lab(g.c,g.p)}</button>`).join('')+`<button class="dk" data-g="deb">🧪 デバフガチャ<br>💎1,000</button>`;
+ $('gachas').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const g=b.dataset.g;if(g==='n1')normal(1);else if(g==='n10')normal(10);else if(g==='l1')life(1);else if(g==='l10')life(10);else if(g==='deb')debuff();else run(+g)});
+ $('inv').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i,c=G.owned[i];if(!c)return;
+  if(b.dataset.a==='sell'){G.money=Math.min(CAP,G.money+c.sell);G.owned.splice(i,1);log('💸 売却 ▶ '+c.name);U('inv')}
+  else if(b.dataset.a==='trade'){if(c._moon||c.type==='frontier')return alert('このキャラは交換できません');const n=Math.random().toString(36).slice(2)+Date.now().toString(36);T={i,name:c.name,n};$('trOut').value=enc({v:1,t:Date.now(),n,c:{name:c.name}});$('trIn').value='';$('trErr').textContent='';$('popT').classList.add('on')}});
+ $('resL').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const r=RES.find(x=>x[0]===b.dataset.k);if(!r)return;if(G.crystal<r[2])return alert('結晶不足');G.crystal-=r[2];G.research[r[0]]++;if(r[0]==='cap')G.baseCap+=5;if(r[0]==='life')G.lp++;log('研究完了 ▶ '+r[1]);U('res')});
+ $('moonL').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i,c=G.moon[i];if(!c)return;const p=c.sell*10;if(G.money<p)return alert('お金不足');if(!room(1))return;G.money-=p;const n=clone(c);n._moon=1;G.moon.splice(i,1);obtain(n);U('moon')});
+ const lt=$('lowTg');try{lt.checked=localStorage.getItem('cec-low')==='1'}catch(e){}document.body.classList.toggle('low',lt.checked);
+ lt.addEventListener('change',()=>{document.body.classList.toggle('low',lt.checked);try{localStorage.setItem('cec-low',lt.checked?'1':'0')}catch(e){}});
+ let ai=0;const ad=()=>{$('ad').textContent=ADS[ai++%ADS.length]};ad();setInterval(ad,3500);
+ const h=location.hash.replace('#','');tab(TABS.some(t=>t[0]===h)?h:'home');
+ if(!G.logs.length){log('🏆 実績は未達成で🔐、達成で緑に発光します。');log('⚔️ ボスは 06-07 / 12-13 / 18-19 時に出現します。')}
+ if(!G.moon.length||Date.now()-G.moonT>9e5)moonRefresh();
+ ['inv','dex','ach','res','log','moon'].forEach(x=>D.add(x));evInit();bossAuto();checkAch();paint();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body></html>
