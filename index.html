@@ -2,69 +2,88 @@
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>CYBER EMOJI CORE</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;-webkit-tap-highlight-color:transparent}
-:root{--cy:#00e5ff;--pk:#ff3cf7}
-body{background:#050816 radial-gradient(circle at top,#0b2748,#050816 55%);color:#fff;overflow-x:hidden;min-height:100vh}
-header{position:sticky;top:0;z-index:100;padding:10px;background:rgba(3,6,15,.94);border-bottom:1px solid rgba(255,255,255,.08)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.stat{background:#0b1322;border:1px solid rgba(0,229,255,.2);border-radius:12px;padding:6px 8px;font-size:11px}
-.stat b{display:block;margin-top:3px;font-size:13px;word-break:break-all}
-#money{font-size:20px;color:#ffd700;text-shadow:0 0 8px #fa0}
-.tabs{display:flex;gap:6px;margin-top:8px;overflow-x:auto;padding-bottom:4px}
-.tabBtn{flex:none;padding:9px 12px;border:0;border-radius:12px;background:#101c33;color:#fff;font-weight:700;font-size:13px;cursor:pointer}
-.tabBtn.on{background:linear-gradient(135deg,var(--cy),#1f7fff);color:#00131b}
-main{padding:10px 10px 120px}
-.panel{display:none}.panel.on{display:block}
-.sec{background:#0d1628;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:12px;margin-bottom:12px}
-.ttl{font-size:17px;font-weight:900;color:var(--cy);margin-bottom:8px}
-.sm{font-size:11px;opacity:.8;line-height:1.6}
-.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-button{min-height:40px;border:0;border-radius:12px;color:#fff;font-weight:900;font-size:13px;cursor:pointer;background:linear-gradient(135deg,#00e5ff,#0077ff);padding:8px;line-height:1.3}
-button:active{transform:scale(.97)}
-button.pk{background:linear-gradient(135deg,#ff3cf7,#ff0055)}button.dk{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid rgba(255,255,255,.15)}
-button.gd{background:linear-gradient(135deg,#ffd700,#ff8800);color:#111}button.rd{background:linear-gradient(135deg,#ff355b,#ff8844)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.card{background:#0f1930;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px}
-.card .e{font-size:32px}.card .n{font-size:12px;font-weight:800;margin-top:5px}.card .r{font-size:11px;opacity:.75;margin-top:3px}
-.card .s{font-size:11px;color:#6effd5;margin-top:3px;overflow-wrap:anywhere}
-.card button{width:100%;margin-top:6px;min-height:32px;font-size:12px}
-.row{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#0d172a;padding:9px;border-radius:12px;font-size:12px;margin-bottom:6px;border:1px solid rgba(255,255,255,.06)}
-.lock{opacity:.4}.got{border-color:rgba(0,255,153,.45);box-shadow:0 0 10px rgba(0,255,153,.25)}
-.list{max-height:480px;overflow:auto}
-.hp{height:16px;background:#222;border-radius:99px;overflow:hidden;margin-top:8px}.hp i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff3d3d,#fc0)}
-.box{text-align:center;padding:14px;border-radius:16px;background:#190b12}
-.pop{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;padding:12px}.pop.on{display:flex}
-.pbox{width:100%;max-width:540px;max-height:88vh;overflow:auto;background:#08111f;border:1px solid rgba(0,229,255,.3);border-radius:18px;padding:14px}
-textarea{width:100%;height:90px;background:#000d1a;color:#fff;border:1px solid rgba(0,229,255,.4);border-radius:8px;padding:8px;font:12px monospace;margin-top:6px}
-.err{color:#ff6b6b;font-size:12px;font-weight:900;margin-top:6px;min-height:16px}
-#ad{margin-bottom:10px;border:1px solid rgba(0,229,255,.25);border-radius:12px;padding:9px 12px;font-size:12px;font-weight:700;background:#0a1a2e;color:#9ff;min-height:38px}
-#dock{position:fixed;right:10px;bottom:10px;z-index:400}
+:root{--ol:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000,0 3px 0 #000}
+html{scroll-behavior:smooth;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{color:#fff;overflow-x:hidden;min-height:100vh;background-color:#0a2f8a;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 28px,transparent 28px 56px),radial-gradient(circle at 50% 0,#2a74dc,#1250c0 40%,#08266f);background-attachment:fixed}
+header{padding:14px 10px 6px}
+h1{text-align:center;font-size:clamp(30px,9.5vw,58px);font-weight:900;letter-spacing:1px;line-height:1.05;text-shadow:-3px -3px 0 #000,3px -3px 0 #000,-3px 3px 0 #000,3px 3px 0 #000,0 6px 0 #000,0 10px 12px rgba(0,0,0,.5);color:#fff}
+#ad{min-height:120px;margin:12px 0;padding:12px;display:flex;align-items:center;justify-content:center;gap:12px;text-align:center;font-size:clamp(16px,4.6vw,22px);font-weight:900;text-shadow:var(--ol);background:linear-gradient(135deg,#ff9f1a,#ff5e62 55%,#a53bff);border:4px solid #000;border-radius:20px;box-shadow:0 7px 0 #5a1a8a,0 14px 18px rgba(0,0,0,.45)}
+#ad .adE{font-size:52px;line-height:1}
+.r3,.r2{display:grid;gap:8px;margin-bottom:8px}.r3{grid-template-columns:repeat(3,1fr)}.r2{grid-template-columns:repeat(2,1fr)}
+.stat{background:linear-gradient(#2b78f0,#1349b8);border:3px solid #000;border-radius:14px;padding:6px 8px;font-size:11px;font-weight:900;color:#ffe44d;text-shadow:1px 1px 0 #000;text-align:center;box-shadow:0 4px 0 #0a2a78,0 9px 10px rgba(0,0,0,.35)}
+.stat b{display:block;margin-top:3px;font-size:14px;color:#fff;word-break:break-all;text-shadow:var(--ol)}
+#money{font-size:18px;color:#ffe44d}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;display:flex;gap:10px;overflow-x:auto;padding:10px 10px 16px;background:rgba(10,40,120,.94);border-bottom:3px solid #000;scroll-behavior:smooth}
+.tabBtn{flex:none;min-height:56px;padding:0 20px;font-size:17px}
+.tabBtn.on{background:linear-gradient(#9dff8a,#27c93f);box-shadow:0 5px 0 #17802a,0 10px 12px rgba(0,0,0,.45)}
+main{padding:12px 10px 130px}
+.panel{display:none}.panel.on{display:block;animation:slideIn .4s cubic-bezier(.22,1,.36,1)}
+@keyframes slideIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.sec{background:#1747b8;border:3px solid #000;border-radius:18px;padding:12px;margin-bottom:14px;box-shadow:0 6px 0 #0a2a78,0 12px 16px rgba(0,0,0,.35)}
+.ttl{font-size:19px;font-weight:900;margin-bottom:8px;text-shadow:var(--ol)}
+.sm{font-size:11px;opacity:.95;line-height:1.6;text-shadow:1px 1px 0 #000}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+button{min-height:46px;padding:8px 10px;border:3px solid #000;border-radius:13px;color:#fff;font-weight:900;font-size:15px;line-height:1.3;cursor:pointer;text-shadow:var(--ol);background:linear-gradient(#ffe84d,#ffc400);box-shadow:0 5px 0 #b87400,0 11px 13px rgba(0,0,0,.45)}
+button:active{transform:translateY(4px)!important;box-shadow:0 1px 0 #b87400,0 3px 5px rgba(0,0,0,.4);animation:none!important}
+button.rd{background:linear-gradient(#ff7b7b,#e02424);box-shadow:0 5px 0 #8a1010,0 11px 13px rgba(0,0,0,.45)}
+button.big{width:100%;min-height:76px;font-size:26px;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.card{position:relative;text-align:center;background:linear-gradient(#2a6be0,#1743ad);border:3px solid #000;border-radius:15px;padding:10px;box-shadow:0 5px 0 #0a2a78,0 10px 12px rgba(0,0,0,.35)}
+.card .e{font-size:34px}.card .n{font-size:12px;font-weight:900;margin-top:5px;text-shadow:1px 1px 0 #000}.card .r{font-size:11px;margin-top:3px;opacity:.9}
+.card .s{font-size:11px;color:#9fffd9;margin-top:3px;overflow-wrap:anywhere;text-shadow:1px 1px 0 #000}
+.card button{width:100%;margin-top:7px;min-height:34px;font-size:13px}
+.card button.fav{position:absolute;left:5px;top:5px;width:36px;height:36px;min-height:0;margin:0;padding:0;border-radius:50%;font-size:22px;line-height:1;background:#16347f;color:#8ea6e0;text-shadow:none;box-shadow:0 3px 0 #08184a;animation:none}
+.card button.fav.on{color:#ffd400;background:#3a2c00;text-shadow:0 0 8px #ffd400,-1px -1px 0 #000,1px 1px 0 #000}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#123a9e;padding:9px;border-radius:12px;font-size:12px;margin-bottom:7px;border:2px solid #000;font-weight:700}
+.row button{min-height:36px;font-size:13px}
+.lock{opacity:.45}.got{border-color:#3dff7a;box-shadow:0 0 10px #3dff7a}
+.list{max-height:480px;overflow:auto;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding:2px 6px 10px 2px}
+.hp{height:18px;background:#0a1d52;border:2px solid #000;border-radius:99px;overflow:hidden;margin-top:8px}.hp i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff3d3d,#ffd400)}
+.box{text-align:center;padding:14px;border-radius:16px;background:#0f3190;border:3px solid #000}
+.pager{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.page{flex:0 0 100%;scroll-snap-align:start;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:4px 6px 14px;align-content:start}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:6px}.dots i{width:13px;height:13px;border-radius:50%;background:#7fa4e8;border:2px solid #000}.dots i.on{background:#ffd400}
+.pop{position:fixed;inset:0;z-index:500;background:rgba(0,10,50,.8);display:none;align-items:center;justify-content:center;padding:12px}.pop.on{display:flex}
+.pbox{width:100%;max-width:540px;max-height:88vh;overflow:auto;scroll-behavior:smooth;background:#1747b8;border:3px solid #000;border-radius:18px;padding:14px;box-shadow:0 7px 0 #0a2a78}
+.pop.on .pbox{animation:slideIn .3s cubic-bezier(.22,1,.36,1)}
+textarea,input{width:100%;background:#0a1d52;color:#fff;border:2px solid #000;border-radius:10px;padding:8px;font:12px monospace}
+textarea{height:90px;margin-top:6px}
+.err{color:#ffb0b0;font-size:12px;font-weight:900;margin-top:6px;min-height:16px;text-shadow:1px 1px 0 #000}
+#dock{position:fixed;right:10px;bottom:12px;z-index:400;display:flex;gap:10px}
 .flash{position:fixed;inset:0;pointer-events:none;z-index:490;animation:fl 1.2s forwards}
 .fall{position:fixed;top:-40px;pointer-events:none;z-index:491;animation:fa linear forwards}
 @keyframes fl{0%{opacity:0}40%{opacity:.9}100%{opacity:0}}
 @keyframes fa{to{transform:translate(var(--d),115vh) rotate(360deg);opacity:0}}
-.low .flash,.low .fall{display:none}
-.card.bm1{box-shadow:0 0 6px #a00}.card.bm2{border-color:#c00;box-shadow:0 0 10px #c00;background:#241018}.card.bm3{border-color:#f22;box-shadow:0 0 14px #f22;background:#3a0c14}.card.bm4{border-color:#f00;box-shadow:0 0 20px #f00,inset 0 0 14px #a00;background:#4a0508}
+.card.bm1{box-shadow:0 0 6px #a00,0 5px 0 #0a2a78}.card.bm2{border-color:#c00;box-shadow:0 0 10px #c00;background:#4a1030}.card.bm3{border-color:#f22;box-shadow:0 0 14px #f22;background:#5a0c18}.card.bm4{border-color:#f00;box-shadow:0 0 20px #f00,inset 0 0 14px #a00;background:#6a0508}
 .card.bm1 .e{filter:sepia(.3) saturate(1.5) hue-rotate(-30deg)}.card.bm2 .e{filter:sepia(.6) saturate(2.5) hue-rotate(-40deg)}.card.bm3 .e,.card.bm4 .e{filter:sepia(1) saturate(5) hue-rotate(-50deg) drop-shadow(0 0 6px red)}
-.low *{animation:none!important;transition:none!important}
+/* 待機モーション（設定でOFF可） */
+@keyframes idle{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1.2px) scale(1.018)}}
+@keyframes idleS{0%,100%{transform:scale(1)}50%{transform:scale(1.012)}}
+@keyframes titleBob{0%,100%{transform:scale(1) rotate(-.6deg)}50%{transform:scale(1.03) rotate(.6deg)}}
+body:not(.noidle) button,body:not(.noidle) .stat,body:not(.noidle) #ad{animation:idle 2.6s ease-in-out infinite}
+body:not(.noidle) .card,body:not(.noidle) .box,body:not(.noidle) .ttl{animation:idleS 2.6s ease-in-out infinite}
+body:not(.noidle) h1{animation:titleBob 2.6s ease-in-out infinite}
+body:not(.noidle) .card button.fav,body:not(.noidle) .panel{animation:none}
+body:not(.noidle) .panel.on{animation:slideIn .4s cubic-bezier(.22,1,.36,1)}
+/* ガチャ演出 */
+#gAnim{position:fixed;inset:0;z-index:800;display:flex;align-items:center;justify-content:center;background:#0a1d52;animation:gaBg 4s linear forwards}
+#gAnim .gE{font-size:60px;animation:gaE 4s ease-in forwards}
+@keyframes gaBg{0%{background:#0a1d52}45%{background:#2a6be0}75%{background:#bfe0ff}90%,100%{background:#fff}}
+@keyframes gaE{0%{transform:scale(0) rotate(-30deg);filter:drop-shadow(0 0 0 #fff)}20%{transform:scale(1.4) rotate(0);filter:drop-shadow(0 0 20px #fff)}50%{transform:scale(2.2);filter:drop-shadow(0 0 50px #ffe44d)}80%{transform:scale(4.5);filter:drop-shadow(0 0 90px #fff) brightness(1.6)}100%{transform:scale(7);opacity:0;filter:drop-shadow(0 0 120px #fff) brightness(3)}}
 </style></head><body>
 <header>
-<div class="stats">
-<div class="stat">💰 MONEY<b id="money">¥0</b></div><div class="stat">❤️ LP<b id="lp">0</b></div><div class="stat">💎 CRYSTAL<b id="crystal">0</b></div>
-<div class="stat">🏢 BASE<b id="cap">0/5</b></div><div class="stat">🏆 実績<b id="ac">0</b></div><div class="stat">📚 図鑑<b id="dc">0</b></div>
-<div class="stat">🪙 EMOZOO<b id="ez" style="color:#b300ff">0 EZ</b></div><div class="stat">🔩 強化素材<b id="mat">0</b></div>
-<label class="stat" style="display:flex;align-items:center;gap:6px;grid-column:span 2"><input type="checkbox" id="lowTg">アニメ停止（軽量）</label>
-</div>
-<div class="tabs" id="tabs"></div>
+<h1>CYBER EMOJI CORE</h1>
+<div id="ad"></div>
+<div class="r3"><div class="stat">💰 MONEY<b id="money">¥0</b></div><div class="stat">❤️ LP<b id="lp">0</b></div><div class="stat">💎 CRYSTAL<b id="crystal">0</b></div></div>
+<div class="r2"><div class="stat">🪙 EMOZOO<b id="ez">0 EZ</b></div><div class="stat">🔩 強化素材<b id="mat">0</b></div></div>
+<div class="r3"><div class="stat">🏢 BASE<b id="cap">0/5</b></div><div class="stat">🏆 実績<b id="ac">0</b></div><div class="stat">📚 図鑑<b id="dc">0</b></div></div>
 </header>
+<div class="tabs" id="tabs"></div>
 <main>
-<section class="panel on" id="p_home">
-<div class="sec"><div id="ad"></div><div class="ttl">⚡ CYBER EMOJI CORE</div><div class="sm">ネオン放置型インフレガチャゲーム（絵文字コレクション／えもこれ）</div><div class="btns" id="gachas"></div></div>
-<div class="sec"><div class="ttl">👥 所持キャラクター</div><div class="grid" id="inv"></div></div>
-<div class="sec"><div class="ttl">🏢 基地管理</div><div class="btns">
-<button onclick="A.expand()">基地拡張</button><button onclick="A.buyLP()">2億円 → 1LP</button>
-<button class="pk" onclick="A.accel()">10LP 加速</button><button class="pk" onclick="A.noEsc()">3LP 妨害阻止</button>
-<button onclick="A.lp2c()">200LP → 💎1</button><button class="gd" onclick="A.ezOpen()">キャラ3体 → 🪙1EZ＋¥10,000</button></div></div>
-</section>
+<section class="panel on" id="p_gacha"><div class="sec"><div class="ttl">🎰 ガチャ</div><div class="btns" id="gachas"></div><div class="btns"><button style="grid-column:span 2" onclick="A.lp2c()">200LP → 💎1 に交換</button></div></div></section>
+<section class="panel" id="p_home"><div class="sec"><div class="ttl">👥 所持キャラクター</div><div class="sm">★でお気に入り（最新が一番上）／横にスワイプで次のページ（10体ごと）</div><div class="pager" id="inv"></div><div class="dots" id="dots"></div></div>
+<div class="sec"><div class="ttl">🏢 基地管理</div><div class="btns"><button onclick="A.buyLP()">2億円 → 1LP</button><button onclick="A.accel()">10LP 加速</button><button onclick="A.noEsc()">3LP 妨害阻止</button><button onclick="A.ezOpen()">キャラ3体 → 🪙1EZ＋¥10,000</button></div></div>
+<button class="big" id="expBtn" onclick="A.expand()">🏢 基地拡張</button></section>
 <section class="panel" id="p_dex"><div class="sec"><div class="ttl">📚 図鑑</div><div class="list" id="dexL"></div></div></section>
 <section class="panel" id="p_ach"><div class="sec"><div class="ttl">🏆 実績</div><div class="list" id="achL"></div></div></section>
 <section class="panel" id="p_boss"><div class="sec"><div class="ttl">⚔️ ボスレイド</div><div class="box"><div id="bName">ボス待機中...</div><div class="hp"><i id="bHp"></i></div><div id="bTxt" class="sm" style="margin-top:8px">06-07 / 12-13 / 18-19時に出現</div>
@@ -77,7 +96,7 @@ textarea{width:100%;height:90px;background:#000d1a;color:#fff;border:1px solid r
 <section class="panel" id="p_dia"><div class="sec"><div class="ttl">💎 ダイヤルーム</div><div class="box"><div style="font-size:28px">💎 <span id="diaS">0</span></div><div class="sm" style="margin-top:6px">30分ごとに💎5が貯まります</div>
 <div class="btns"><button onclick="A.diaGet()">回収</button><button class="pk" onclick="A.diaBuy(4e10,1)">400億円→💎1</button><button class="gd" style="grid-column:span 2" onclick="A.diaBuy(4e13,1000)">40兆円→💎1000</button></div></div></div></section>
 <section class="panel" id="p_rank"><div class="sec"><div class="ttl">🏆 ランクシステム</div><div class="box"><div id="rV" style="font-size:28px;font-weight:900">C-</div><div style="margin-top:6px">🪓😇🎮 ゴッドゲーマー</div><div id="rTxt" class="sm" style="margin-top:8px">挑戦待機</div><div class="hp"><i id="rHp"></i></div>
-<div class="btns"><button onclick="A.rStart()">⚡挑戦（15秒）</button><button class="pk" onclick="A.rAtk()">🗡️攻撃</button></div><div class="sm" style="margin-top:8px">攻撃力＝毎秒収入×10 ／ 失敗で1時間待機 ／ 30日でランク-2</div></div></div></section>
+<div class="btns"><button onclick="A.rStart()">⚡挑戦（15秒）</button><button class="pk" onclick="A.rAtk()">🗡️攻撃</button></div><div class="sm" style="margin-top:8px">攻撃力＝毎秒収入×10＋キャラの攻撃力×100 ／ 失敗で1時間待機 ／ 30日でランク-2</div></div></div></section>
 <section class="panel" id="p_evt"><div id="evtBox"></div></section>
 <section class="panel" id="p_blog"><div class="sec"><div class="ttl">📰 公式ブログ</div>
 <div class="row" style="display:block"><div class="sm">2026/06/03</div><b>💴📤交換機能追加！</b><div class="sm">交換機能が実装されました。問題が起きた場合は廃止の可能性があります。</div></div>
@@ -85,9 +104,13 @@ textarea{width:100%;height:90px;background:#000d1a;color:#fff;border:1px solid r
 <div class="row" style="display:block"><div class="sm">2026/06/03</div><b>👏ホワイトウェザーガチャ実装！</b><div class="sm">ゲーム正式名称は「絵文字コレクション（えもこれ）」です。</div></div>
 <div class="row" style="display:block"><div class="sm">2026/06/02</div><b>🎉 公式ブログ開設！</b><div class="sm">アップデート情報をここでお知らせします。</div></div></div></section>
 </main>
-<div id="dock"><button onclick="A.saveOpen()">保存/読込</button></div>
+<div id="dock"><button onclick="A.setOpen()">⚙️ 設定</button><button onclick="A.saveOpen()">保存/読込</button></div>
 
 <div class="pop" id="popR"><div class="pbox"><div class="ttl">🎰 ガチャ結果</div><div class="grid" id="resG"></div><button class="rd" style="width:100%;margin-top:10px" onclick="A.close('popR')">閉じる</button></div></div>
+<div class="pop" id="popSet"><div class="pbox"><div class="ttl">⚙️ 設定</div>
+<div class="row"><span>待機モーション</span><button id="setIdle" onclick="A.setTog('idle')">ON</button></div>
+<div class="row"><span>ガチャ引き演出（4秒）</span><button id="setAnim" onclick="A.setTog('anim')">ON</button></div>
+<button class="rd" style="width:100%;margin-top:10px" onclick="A.close('popSet')">閉じる</button></div></div>
 <div class="pop" id="popS"><div class="pbox"><div class="ttl">🔐 引き継ぎ（暗号化セーブ）</div>
 <div class="sm">引き継ぎコードはAES-256-GCM（PBKDF2-SHA256 60万回）で暗号化されます。パスワードはどこにも保存されません。忘れると復元できません。</div>
 <input id="savePass" type="password" autocomplete="off" placeholder="パスワード（8文字以上）" style="width:100%;margin-top:6px;padding:10px;border-radius:8px;border:1px solid #0ae6;background:#000d1a;color:#fff">
@@ -188,6 +211,7 @@ function checkSave(o){if(!o||typeof o!=='object'||Array.isArray(o))throw new Err
  for(const c of o.owned)if(!c||typeof c.name!=='string'||c.name.length>100||typeof c.sell!=='number'||!(c.sell>0)||c.sell>CAP)throw new Error('キャラデータが不正です');return true}
 function playStep(e,dt,active,busy,rand,win){if(!active||busy)return null;e.playAcc=Math.min(num(e.playAcc)+Math.max(0,dt),win*2);if(e.playAcc<win)return null;e.playAcc=Math.max(0,e.playAcc-win);return rand()<.8?'start':'miss'}
 function banner(t){let d=$('banner');if(!d){d=document.createElement('div');d.id='banner';d.style.cssText='background:#a00;color:#fff;padding:8px;font-size:12px;font-weight:700;position:sticky;top:0;z-index:600';document.body.prepend(d)}d.textContent=t}
+addEventListener('error',e=>{try{banner('エラー：'+e.message)}catch(_){}});
 let ready=false,saveErr=false,lastBak=0,sq=Promise.resolve();
 async function doSave(){if(!ready||!SUB)return;try{const code=await localSeal(G);try{const cur=localStorage.getItem(KEY3);if(cur&&Date.now()-lastBak>6e4){localStorage.setItem(KBAK,cur);lastBak=Date.now()}}catch(e){}localStorage.setItem(KEY3,code);saveErr=false}catch(e){saveErr=true;console.warn('save failed',e)}}
 function save(){sq=sq.then(doSave).catch(()=>{});return sq}
@@ -207,11 +231,17 @@ let st=0;const sv=()=>{clearTimeout(st);st=setTimeout(save,400)};
 const D=new Set(['inv','dex','ach','res','log','moon']);let raf=0;
 function U(...k){k.forEach(x=>D.add(x));if(!raf)raf=requestAnimationFrame(()=>{raf=0;paint()});sv()}
 function card(c,extra){return `<div class="card"><div class="e">${esc(c.emoji)}</div><div class="n">${esc(c.name)}</div><div class="r">${esc(c.rarity)}</div><div class="s">${extra||fmt(c.sell)}</div></div>`}
-function paint(){
+let invPage=0,invPages=1,gaBusy=false;
+const S=()=>G.set=Object.assign({idle:true,anim:true},G.set&&typeof G.set==='object'?G.set:{});
+function dots(){let h='';for(let i=0;i<invPages;i++)h+=`<i${i===invPage?' class="on"':''}></i>`;$('dots').innerHTML=invPages>1?h:''}
+function paint(){document.body.classList.toggle('noidle',!S().idle);$('expBtn').textContent='🏢 基地拡張（'+fmt(5e4*G.baseCap)+'）';
  $('money').textContent=fmt(G.money);$('lp').textContent=G.lp+' LP';$('crystal').textContent=G.crystal.toLocaleString();
  $('cap').textContent=G.owned.length+' / '+G.baseCap;$('ac').textContent=G.ach.length;$('dc').textContent=G.dex.length;$('ez').textContent=G.ez.toLocaleString()+' EZ';
  $('diaS').textContent=G.diaStored;$('mat').textContent=num(G.mat).toLocaleString();$('rV').textContent=RN[G.rank]||'♾️';
- if(D.has('inv')){let h='';for(let i=G.owned.length-1;i>=0;i--){const c=G.owned[i];h+=`<div class="card bm${c.bm|0}"><div class="e">${esc(c.emoji)}</div><div class="n">${esc(c.name)}${c.bm?' 🩸'+c.bm:''}</div><div class="r">${esc(c.rarity)}${c.desc?' ｜'+esc(c.desc):''}</div><div class="s">売却 ${fmt(c.sell)}</div><button class="rd" data-a="sell" data-i="${i}">売却</button><button data-a="trade" data-i="${i}">交換</button></div>`}$('inv').innerHTML=h}
+ if(D.has('inv')){const ord=G.owned.map((c,i)=>i).sort((x,y)=>{const f=G.owned[x].fav|0,g=G.owned[y].fav|0;return f&&g?g-f:f?-1:g?1:y-x});
+ const cs=ord.map(i=>{const c=G.owned[i],a=atkOf(c);return `<div class="card bm${c.bm|0}"><button class="fav${c.fav?' on':''}" data-a="fav" data-i="${i}">★</button><div class="e">${esc(c.emoji)}</div><div class="n">${esc(c.name)}${c.bm?' 🩸'+c.bm:''}</div><div class="r">${esc(c.rarity)}${c.desc?' ｜'+esc(c.desc):''}${a?' ｜⚔'+Math.floor(a).toLocaleString():''}</div><div class="s">売却 ${fmt(c.sell)}</div><button class="rd" data-a="sell" data-i="${i}">売却</button><button data-a="trade" data-i="${i}">交換</button></div>`});
+ const pg=[];for(let k=0;k<cs.length;k+=10)pg.push(cs.slice(k,k+10).join(''));invPages=Math.max(1,pg.length);invPage=Math.min(invPage,invPages-1);
+ const el=$('inv');el.style.scrollBehavior='auto';el.innerHTML=pg.map(h=>`<div class="page">${h}</div>`).join('')||'<div class="page"><div class="sm">キャラがいません</div></div>';el.scrollLeft=invPage*(el.clientWidth||0);el.style.scrollBehavior='';dots()}
  if(D.has('dex')){$('dexL').innerHTML=ALL.concat(EXC).map(c=>{const g=G.dex.includes(c.name);return `<div class="row ${g?'':'lock'}"><span>${g?esc(c.emoji)+' '+esc(c.name):'❓ ？？？'}</span><span>${g?esc(c.rarity):''}</span></div>`}).join('')}
  if(D.has('ach')){$('achL').innerHTML=ACH.map(a=>{const g=G.ach.includes(a[0]);return `<div class="row ${g?'got':'lock'}"><b>${g?'':'🔐 '}${a[1]}</b><span>${g?'済':'未'}</span></div>`}).join('')}
  if(D.has('res')){$('resL').innerHTML=RES.map(r=>`<div class="row"><div><div>${r[1]}（Lv.${G.research[r[0]]||0}）</div><div class="sm">${r[3]}</div></div><button data-a="res" data-k="${r[0]}" ${G.crystal<r[2]?'style="opacity:.5"':''}>買う 💎${r[2]}</button></div>`).join('')}
@@ -224,7 +254,10 @@ const RE=[4,6,8,10,12,14,16,18,20,24,28,32,36,40,44,48,52,56,60,64,100,112,449,1
 function log(t){G.logs.push('['+new Date().toLocaleTimeString()+'] '+t);if(G.logs.length>200)G.logs.shift();U('log')}
 function fx(f){if(document.body.classList.contains('low'))return;const d=document.createElement('div');d.className='flash';d.style.background=`radial-gradient(circle,${f[0]} 0%,transparent 70%)`;document.body.appendChild(d);setTimeout(()=>d.remove(),1300);
  for(let i=0;i<36;i++){const p=document.createElement('div');p.className='fall';p.textContent=f[1];p.style.cssText+=`left:${Math.random()*100}vw;font-size:${14+Math.random()*20}px;animation-duration:${1.5+Math.random()*2}s;--d:${Math.random()*300-150}px`;document.body.appendChild(p);setTimeout(()=>p.remove(),3800)}}
-function results(list){$('resG').innerHTML=list.map(c=>card(c)).join('');$('popR').classList.add('on')}
+function results(list){const show=()=>{$('resG').innerHTML=list.map(c=>card(c)).join('');$('popR').classList.add('on')};
+ if(S().anim===false||gaBusy){show();return}
+ gaBusy=true;const o=document.createElement('div');o.id='gAnim';o.innerHTML='<div class="gE">😃</div>';document.body.appendChild(o);
+ setTimeout(()=>{o.remove();gaBusy=false;show()},4000)}
 /* ===== 取得/ガチャ ===== */
 const clone=o=>JSON.parse(JSON.stringify(o));
 function obtain(c){c.sell=Math.min(CAP,Math.max(1,num(c.sell,1)));G.owned.push(c);G.money=Math.min(CAP,G.money+Math.floor(c.sell/4));
@@ -252,18 +285,20 @@ noEsc(){if(G.lp<3)return alert('LP不足');G.lp-=3;noEscUntil=Date.now()+18e5;lo
 lp2c(){if(G.lp<200)return alert('200LP必要');G.lp-=200;G.crystal++;log('200LP → 💎1');U()},
 close(id){$(id).classList.remove('on')},
 /* ボス */
-atk(){if(bHP<=0||!boss)return;bHP-=100+count('LEGEND')*150+(count('CHIMERA')+count('EVENT'))*500;if(bHP<=0){bHP=0;let lp=5;if(lifeFest())lp*=3;if(on('lpx3'))lp*=3;if(on('bossLp'))lp+=5;let c=0;if(diaFest()||on('diaFest'))c=1;
+atk(){if(bHP<=0||!boss)return;bHP-=Math.floor((100+count('LEGEND')*150+(count('CHIMERA')+count('EVENT'))*500+atk())*(1+ef('boss')));if(bHP<=0){bHP=0;let lp=5;if(lifeFest())lp*=3;if(on('lpx3'))lp*=3;if(on('bossLp'))lp+=5;let c=0;if(diaFest()||on('diaFest'))c=1;
   G.money=Math.min(CAP,G.money+(5e5+(on('bossMoney')?1e6:0))*(1+ef('boss')));G.lp+=lp;G.crystal+=c;G.bossKill++;log('⚔️ ボス撃破 ▶ '+boss.name+`（+${lp}LP${c?' +💎1':''}）`);obtain(clone(boss));boss=null;alert('ボス撃破！')}U()},
 force(){if(G.money<1e9)return alert('10億円必要');G.money-=1e9;const b=band();spawn(pickBoss(b||['M','N','E'][Math.random()*3|0]));log('💎 強制出現 ▶ '+boss.name);U()},
 mSpawn(){mb=MB[Math.random()*MB.length|0];mHP=mMax=mb.hp;$('mName').textContent=mb.name;U()},
-mAtk(){if(!mb)return;mHP=Math.max(0,mHP-(500+count('LEGEND')*200+count('CHIMERA')*700));if(mHP===0){mc++;const m=mc>=21?5:mc>=16?3:mc>=11?2:mc>=6?1.5:1;let lp=Math.floor(mb.lp*m)+(on('miniLp')?2:0);G.lp+=lp;log('⚔️ 小ボス撃破 ▶ '+mb.name+` ×${m}（+${lp}LP）`);mb=null;$('mName').textContent='撃破完了'}U()},
+mAtk(){if(!mb)return;mHP=Math.max(0,mHP-(500+count('LEGEND')*200+count('CHIMERA')*700+Math.floor(atk()/10)));if(mHP===0){mc++;const m=mc>=21?5:mc>=16?3:mc>=11?2:mc>=6?1.5:1;let lp=Math.floor(mb.lp*m)+(on('miniLp')?2:0);G.lp+=lp;log('⚔️ 小ボス撃破 ▶ '+mb.name+` ×${m}（+${lp}LP）`);mb=null;$('mName').textContent='撃破完了'}U()},
 diaGet(){if(G.diaStored<=0)return alert('回収なし');G.crystal+=G.diaStored;log('💎 ダイヤ回収 +'+G.diaStored);G.diaStored=0;U()},
 diaBuy(p,n){if(G.money<p)return alert(fmt(p)+'必要');G.money-=p;G.crystal+=n;log('💰 '+fmt(p)+' → 💎'+n);U()},
 /* ランク */
 rStart(){if(G.rank>=24)return alert('すでに最高ランクです');if(Date.now()<G.rankCd)return alert('あと'+Math.ceil((G.rankCd-Date.now())/6e4)+'分待機が必要です');rLog=RE[G.rank];rOn=true;rEnd=Date.now()+15000;log('🏆 ランク挑戦開始');rBar()},
-rAtk(){if(!rOn)return;const ld=Math.log10(Math.max(1,income()*10));if(rLog-ld<=15){const x=1-Math.pow(10,ld-rLog);if(x<=1e-9){rOn=false;G.rank++;G.rankDecay=Date.now();log('🏆 ランク昇格 ▶ '+RN[G.rank]);$('rTxt').textContent='昇格！';$('rHp').style.width='0';U();return}rLog+=Math.log10(x)}rBar()},
+rAtk(){if(!rOn)return;const ld=Math.log10(Math.max(1,income()*10+atk()*100));if(rLog-ld<=15){const x=1-Math.pow(10,ld-rLog);if(x<=1e-9){rOn=false;G.rank++;G.rankDecay=Date.now();log('🏆 ランク昇格 ▶ '+RN[G.rank]);$('rTxt').textContent='昇格！';$('rHp').style.width='0';U();return}rLog+=Math.log10(x)}rBar()},
 /* 研究 */
 /* セーブ */
+setOpen(){A.setTog();$('popSet').classList.add('on')},
+setTog(k){const t=S();if(k)t[k]=!t[k];$('setIdle').textContent=t.idle?'ON':'OFF';$('setAnim').textContent=t.anim?'ON':'OFF';U()},
 saveOpen(){$('saveCode').value='';$('popS').classList.add('on')},
 async exp(){try{$('saveCode').value=await exportCode(G,$('savePass').value)}catch(e){alert('書き出し失敗：'+e.message)}},
 async imp(){try{const o=await importCode($('saveCode').value,$('savePass').value);checkSave(o);const g=norm(o);if(!confirm('現在のデータを上書きして読み込みます。よろしいですか？（現在のデータはバックアップされます）'))return;
@@ -341,6 +376,7 @@ const give=c=>{const n=clone(c);n.uid=uid();obtain(n);return n};
 const bo=i=>(E().beings[i]|0)>0,amp=()=>bo(8)?2:1;
 const beingInc=()=>(bo(0)?2*amp():0)+(bo(9)?4:0),gachaBonus=()=>(bo(1)?amp():0)+(bo(9)?4:0),matMul=()=>1+(bo(6)?2*amp():0)+(bo(9)?4:0),offMul=()=>1+(bo(7)?4*amp():0);
 const ef=k=>{let s=0;for(const c of G.owned)if(c.fx&&c.fx.k===k)s+=c.fx.v;return Math.min(s,1e6)};
+const TA={ノーマル:300,レア:1500,超レア:8000,神秘:5e4,禁忌:5e5},atkOf=c=>c?(num(c.atk)||(c.type==='market'?TA[c.rarity]||0:0))*(BM[c.bm|0]||1):0,atk=()=>{let s=0;for(const c of G.owned)s+=atkOf(c);return Math.min(s,1e12)};
 const moonIv=()=>9e5/(1+Math.min(ef('time'),9));
 const addMat=n=>{G.mat=Math.min(CAP,num(G.mat)+Math.floor(n*matMul()))};
 const evName=id=>id==='paradise'&&!E().paradise.seen?'？？？（正体不明の異常）':EVN[id];
@@ -361,22 +397,21 @@ function evStart(id){const e=E(),n=Date.now();let d={},end=0;
 function evEnd(){const e=E(),c=e.cur;if(!c)return;
  if(c.id==='divine'){if([0,1,2,3,4,5,6,7,8].every(i=>e.dexSeen.includes(i))&&!bo(9)&&!e.dexSeen.includes(9))e.zeroForce=true;e.playAcc=0;log('観測記録 '+e.records+'件')}
  log('🌀 イベント終了 ▶ '+EVN[c.id]);e.cur=null;wh=[];save();evDirty=1;U('inv');alert('🌀 '+EVN[c.id]+'が終了しました'+(c.id==='divine'?'\n観測 '+c.d.n+'回／捕獲 '+(c.d.got|0)+'体／記録 '+e.records+'件':''))}
-function roll(m){const e=E(),n=Date.now();const L=[['paradise',.003*(bo(4)?3*amp():1)],['market',.01],['copy',.008],['blood',.008],['white',.01]];
- for(const [id,p] of L)if(Math.random()<Math.min(.9,p*m)){evStart(id);return true}return false}
+function roll(m){if(Math.random()>=Math.min(.9,.04*m))return false;const L=[['paradise',5*(bo(4)?3*amp():1)],['market',20],['copy',20],['blood',20],['white',20]];let t=0;L.forEach(x=>t+=x[1]);let r=Math.random()*t;for(const [id,w] of L){r-=w;if(r<=0){evStart(id);return true}}return false}
 function divSpawn(c,n){const d=c.d,e=E();if(n<d.next||n>=c.end)return;d.next=n+6e4;if(d.enc||d.catching)return;let i=rnd([0,1,2,3,4,5,6,7,8]);if(e.zeroForce){i=9;e.zeroForce=false}
  d.enc={i,f:0};d.n++;e.records++;if(!e.dexSeen.includes(i))e.dexSeen.push(i);log('🔭 観測 ▶ '+BE[i][1]);if(i===9)fx(['#000','⚠️']);evDirty=1;save()}
 let pend=null;
 function evTick(){const e=E(),n=Date.now(),c=e.cur;e.last=n;const dt=Math.min(Math.max(0,n-(e.lastTick||n)),2500);e.lastTick=n;
- if(pend&&!c&&!document.querySelector('.pop.on')){const id=pend;pend=null;evStart(id);return}
+ if(pend&&!c&&!gaBusy&&!document.querySelector('.pop.on')){const id=pend;pend=null;evStart(id);return}
  if(ready){const r=playStep(e,dt,!document.hidden,!!c||!!pend,Math.random,bo(2)?4.5e5:9e5);if(r==='start')pend='divine';else if(r==='miss')log('🔭 神域観測の抽選：不発（次の15分を測定）')}
- if(!c){if(n-e.roll>=6e4&&!document.querySelector('.pop.on')){e.roll=n;roll(1)}return}
+ if(!c){if(n-e.roll>=6e4&&!gaBusy&&!document.querySelector('.pop.on')){e.roll=n;roll(1)}return}
  if(c.end&&n>=c.end&&!(c.d&&c.d.catching)){evEnd();return}
  if(c.id==='divine')divSpawn(c,n);
  if(c.id==='white'){const o=wh.length;wh=wh.filter(x=>x.t>n);if(wh.length!==o)evDirty=1;if(wh.length<8&&n<c.end){const u=wh.map(x=>x.s),fr=[...Array(12).keys()].filter(i=>!u.includes(i));if(fr.length){wh.push({id:uid(),s:rnd(fr),ez:Math.random()<.1,t:n+5000});evDirty=1}}}
  const t=$('evT');if(t&&c.end)t.textContent=mm(c.end-n);
  if(evDirty&&$('p_evt').classList.contains('on'))evRender()}
 /* --- 操作 --- */
-EVA.obs=()=>{if(E().cur)return alert('すでにイベント発生中です');if(G.lp<3)return alert('LP不足');G.lp-=3;if(!roll(25))log('🔭 観測 ▶ 異常なし')};
+EVA.obs=()=>{if(E().cur)return alert('すでにイベント発生中です');if(G.lp<3)return alert('LP不足');G.lp-=3;if(!roll(15))log('🔭 観測 ▶ 異常なし')};
 EVA.pexp=()=>{const P=E().paradise,d=E().cur.d,s=d.stops[d.i];if(!s||d.enc)return;P.seen=true;d.msg='';
  if(s.t==='enc'){const w=PC[s.a].map((_,j)=>1/Math.pow(1+j,1.6));let r=Math.random()*w.reduce((x,y)=>x+y),j=0;for(;j<9;j++){r-=w[j];if(r<=0)break}d.enc={a:s.a,j,att:0};return}
  if(s.t==='chest'){const c=Math.floor((3+Math.random()*8)*(1+ef('chest')));G.crystal+=c;addMat(5+Math.random()*10);d.msg='📦 宝箱：💎+'+c+' と強化素材を入手'}
@@ -434,10 +469,11 @@ function evInit(){const e=E();if(e.cur&&e.cur.d)e.cur.d.catching=false;wh=[];
  $('tabs').addEventListener('click',()=>{evDirty=1});setInterval(evTick,1000);evRender()}
 
 /* ===== UI構築・イベント ===== */
-const TABS=[['home','基地'],['dex','図鑑'],['ach','実績'],['boss','ボス'],['res','研究所'],['log','ログ'],['mini','小ボス'],['moon','ムーンロード'],['dia','ダイヤルーム'],['rank','ランク'],['evt','🌀異世界'],['blog','公式ブログ']];
+const TABS=[['gacha','🎰 ガチャ'],['home','🏢 基地'],['dex','図鑑'],['ach','実績'],['boss','ボス'],['res','研究所'],['log','ログ'],['mini','小ボス'],['moon','ムーンロード'],['dia','ダイヤルーム'],['rank','ランク'],['evt','🌀異世界'],['blog','公式ブログ']];
 function tab(id){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='p_'+id));document.querySelectorAll('.tabBtn').forEach(b=>b.classList.toggle('on',b.dataset.t===id));try{history.replaceState(null,'','#'+id)}catch(e){}}
 async function init(){
- await load();
+ try{await load()}catch(e){G=def();ready=false;banner('保存データの読み込みに失敗しました（この環境では保存できない可能性があります）：'+(e&&e.message))}
+
  $('tabs').innerHTML=TABS.map(t=>`<button class="tabBtn" data-t="${t[0]}">${t[1]}</button>`).join('');
  $('tabs').addEventListener('click',e=>{const b=e.target.closest('.tabBtn');if(b)tab(b.dataset.t)});
  const lab=(c,p)=>c==='m'?fmt(p):c==='c'?'💎'+p.toLocaleString():c==='l'?p+'LP':'💰'+p+' EZ';
@@ -445,14 +481,15 @@ async function init(){
   +GA.map((g,i)=>`<button class="${g.c==='e'?'gd':'dk'}" data-g="${i}">${g.t}<br>${lab(g.c,g.p)}</button>`).join('')+`<button class="dk" data-g="deb">🧪 デバフガチャ<br>💎1,000</button>`;
  $('gachas').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const g=b.dataset.g;if(g==='n1')normal(1);else if(g==='n10')normal(10);else if(g==='l1')life(1);else if(g==='l10')life(10);else if(g==='deb')debuff();else run(+g)});
  $('inv').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i,c=G.owned[i];if(!c)return;
-  if(b.dataset.a==='sell'){G.money=Math.min(CAP,G.money+c.sell);G.owned.splice(i,1);log('💸 売却 ▶ '+c.name);U('inv')}
+  if(b.dataset.a==='fav'){c.fav=c.fav?0:Date.now();U('inv');return}
+  if(b.dataset.a==='sell'){if(c.fav&&!confirm('お気に入りのキャラを売却しますか？'))return;G.money=Math.min(CAP,G.money+c.sell);G.owned.splice(i,1);log('💸 売却 ▶ '+c.name);U('inv')}
   else if(b.dataset.a==='trade'){if(c._moon||c.type==='frontier')return alert('このキャラは交換できません');const n=Math.random().toString(36).slice(2)+Date.now().toString(36);T={i,name:c.name,n};$('trOut').value=enc({v:1,t:Date.now(),n,c:{name:c.name}});$('trIn').value='';$('trErr').textContent='';$('popT').classList.add('on')}});
  $('resL').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const r=RES.find(x=>x[0]===b.dataset.k);if(!r)return;if(G.crystal<r[2])return alert('結晶不足');G.crystal-=r[2];G.research[r[0]]++;if(r[0]==='cap')G.baseCap+=5;if(r[0]==='life')G.lp++;log('研究完了 ▶ '+r[1]);U('res')});
  $('moonL').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i,c=G.moon[i];if(!c)return;const p=c.sell*10;if(G.money<p)return alert('お金不足');if(!room(1))return;G.money-=p;const n=clone(c);n._moon=1;G.moon.splice(i,1);obtain(n);U('moon')});
- const lt=$('lowTg');try{lt.checked=localStorage.getItem('cec-low')==='1'}catch(e){}document.body.classList.toggle('low',lt.checked);
- lt.addEventListener('change',()=>{document.body.classList.toggle('low',lt.checked);try{localStorage.setItem('cec-low',lt.checked?'1':'0')}catch(e){}});
- let ai=0;const ad=()=>{$('ad').textContent=ADS[ai++%ADS.length]};ad();setInterval(ad,3500);
- const h=location.hash.replace('#','');tab(TABS.some(t=>t[0]===h)?h:'home');
+ let ai=0;const ad=()=>{const t=ADS[ai++%ADS.length],m=t.match(/^(\p{Extended_Pictographic}\uFE0F?)\s*([\s\S]*)$/u);$('ad').innerHTML=m?'<span class="adE">'+esc(m[1])+'</span><span>'+esc(m[2])+'</span>':esc(t)};ad();setInterval(ad,3500);
+ $('inv').addEventListener('scroll',()=>{const w=$('inv').clientWidth||1,p=Math.round($('inv').scrollLeft/w);if(p!==invPage){invPage=p;dots()}},{passive:true});
+ {let w=0;const syncIdle=()=>{if(!document.getAnimations)return;const t=Date.now()%2600;document.getAnimations().forEach(a=>{const n=a.animationName;if(n==='idle'||n==='idleS'||n==='titleBob')a.currentTime=t})};if(typeof MutationObserver!=='undefined')new MutationObserver(()=>{clearTimeout(w);w=setTimeout(syncIdle,30)}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style']});setInterval(syncIdle,3000);syncIdle()}
+ const h=location.hash.replace('#','');tab(TABS.some(t=>t[0]===h)?h:'gacha');
  if(!G.logs.length){log('🏆 実績は未達成で🔐、達成で緑に発光します。');log('⚔️ ボスは 06-07 / 12-13 / 18-19 時に出現します。')}
  if(!G.moon.length||Date.now()-G.moonT>9e5)moonRefresh();
  ['inv','dex','ach','res','log','moon'].forEach(x=>D.add(x));evInit();bossAuto();checkAch();paint();
